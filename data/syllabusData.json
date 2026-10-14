@@ -1,0 +1,2813 @@
+{
+  "courseName": "מבני נתונים",
+  "courseCode": "623411",
+  "academicYear": "תשפ״ו",
+  "semester": "קיץ",
+  "source": "Syllabus_HE.pdf",
+  "sourcePages": 3,
+  "syllabusItems": [
+    {
+      "entry": "הסימנים האסימפטוטיים",
+      "topics": [
+        "asy"
+      ],
+      "page": 2
+    },
+    {
+      "entry": "גישת הפרד ומשול",
+      "topics": [
+        "dnc"
+      ],
+      "page": 2
+    },
+    {
+      "entry": "מיון מהיר, חציון ובעיית הבחירה",
+      "topics": [
+        "qs"
+      ],
+      "page": 2
+    },
+    {
+      "entry": "מחסנית ותור",
+      "topics": [
+        "stq"
+      ],
+      "page": 2
+    },
+    {
+      "entry": "רשימה מקושרת ועץ בינרי",
+      "topics": [
+        "list",
+        "bt"
+      ],
+      "page": 2
+    },
+    {
+      "entry": "עץ חיפוש בינרי ועץ AVL",
+      "topics": [
+        "bst",
+        "avl"
+      ],
+      "page": 3
+    },
+    {
+      "entry": "ערימה",
+      "topics": [
+        "heap"
+      ],
+      "page": 3
+    },
+    {
+      "entry": "מיון בזמן לינארי",
+      "topics": [
+        "lin"
+      ],
+      "page": 3
+    },
+    {
+      "entry": "טבלת גיבוב",
+      "topics": [
+        "hash"
+      ],
+      "page": 3
+    },
+    {
+      "entry": "הרחבה של מבנה נתונים",
+      "topics": [
+        "aug"
+      ],
+      "page": 3
+    }
+  ],
+  "grading": {
+    "exam": 80,
+    "runningAssignments": 10,
+    "multipleChoiceAssignments": 10,
+    "sourcePage": 2
+  },
+  "examFormat": {
+    "openQuestions": 2,
+    "multipleChoiceQuestions": 7,
+    "sourcePage": 2,
+    "note": "Current syllabus confirms structure; does not state individual question points, exam duration, or permitted aids."
+  },
+  "topics": [
+    {
+      "id": "asy",
+      "name": "סימנים אסימפטוטיים",
+      "syllabus": {
+        "file": "Syllabus_HE.pdf",
+        "page": 2,
+        "entry": "הסימנים האסימפטוטיים"
+      },
+      "lecture": {
+        "file": "הרצאות/PDF/מצגת 1 - הסימנים האסימפטוטיים.pdf",
+        "pages": 25
+      },
+      "subtopics": [
+        "זמן ריצה כפונקציה של גודל הקלט",
+        "O, Ω, Θ",
+        "מדרג פונקציות",
+        "שיטת הגבולות",
+        "טכניקת הלוגריתם",
+        "חיפוש בינארי כדוגמה",
+        "מקרה טוב/גרוע/ממוצע"
+      ],
+      "subtopicVerification": "legacy candidate list crosschecked at heading level; not a claim that every named detail has been visually checked",
+      "practiceSourcesCandidate": "תרגול 1, תרגול 2, מטלה לא להגשה 1",
+      "priority": "B",
+      "priorityReason": "נושא מפורש בסילבוס; 12 מתוך 24 מבחני המדגם, 16 שאלות ראשיות, 99 נקודות ידועות. בסיס לנושאים המתקדמים; אין לדלג גם אם ההשקעה הייעודית קצרה יותר.",
+      "frequency": {
+        "topic": "asy",
+        "name": "הסימנים האסימפטוטיים",
+        "questionCount": 16,
+        "examCount": 12,
+        "denominator": 24,
+        "knownPoints": 99,
+        "evidence": [
+          {
+            "exam": "2025a-b",
+            "question": "ברירה 2",
+            "points": 7,
+            "source": {
+              "file": "מבחנים לדוגמה/בחינה במבני נתונים 2025 א  מועד ב.docx",
+              "locator": "ברירה 2"
+            }
+          },
+          {
+            "exam": "2024s-b",
+            "question": "ברירה 2",
+            "points": 7,
+            "source": {
+              "file": "מבחנים לדוגמה/בחינה במבני נתונים 2024 קיץ  מועד ב.docx",
+              "locator": "ברירה 2"
+            }
+          },
+          {
+            "exam": "2023b-a",
+            "question": "ברירה 4",
+            "points": 7,
+            "source": {
+              "file": "מבחנים לדוגמה/בחינה במבני נתונים  2023 ב  מועד א.docx",
+              "locator": "ברירה 4"
+            }
+          },
+          {
+            "exam": "2022b-a",
+            "question": "ברירה 6",
+            "points": 6,
+            "source": {
+              "file": "מבחנים לדוגמה/בחינה במבני נתונים 2022 ב מועד א.docx",
+              "locator": "ברירה 6"
+            }
+          },
+          {
+            "exam": "2022s-b",
+            "question": "ברירה 2",
+            "points": 6,
+            "source": {
+              "file": "מבחנים לדוגמה/בחינה במבני נתונים  2022 קיץ  מועד ב.docx",
+              "locator": "ברירה 2"
+            }
+          },
+          {
+            "exam": "2019b-a",
+            "question": "ברירה 3",
+            "points": 6,
+            "source": {
+              "file": "מבחנים לדוגמה/בחינה במבני נתונים 2019 ב מועד א.docx",
+              "locator": "ברירה 3"
+            }
+          },
+          {
+            "exam": "2019b-a",
+            "question": "ברירה 6",
+            "points": 6,
+            "source": {
+              "file": "מבחנים לדוגמה/בחינה במבני נתונים 2019 ב מועד א.docx",
+              "locator": "ברירה 6"
+            }
+          },
+          {
+            "exam": "2019s-b",
+            "question": "ברירה 1",
+            "points": 6,
+            "source": {
+              "file": "מבחנים לדוגמה/מבני נתונים 2019 קיץ מועד ב.docx",
+              "locator": "ברירה 1"
+            }
+          },
+          {
+            "exam": "2019s-b",
+            "question": "ברירה 3",
+            "points": 6,
+            "source": {
+              "file": "מבחנים לדוגמה/מבני נתונים 2019 קיץ מועד ב.docx",
+              "locator": "ברירה 3"
+            }
+          },
+          {
+            "exam": "2018b-a",
+            "question": "ברירה 4",
+            "points": 6,
+            "source": {
+              "file": "מבחנים לדוגמה/בחינה במבני נתונים 2018 ב מועד א.docx",
+              "locator": "ברירה 4"
+            }
+          },
+          {
+            "exam": "2018b-b",
+            "question": "ברירה 3",
+            "points": 6,
+            "source": {
+              "file": "מבחנים לדוגמה/בחינה במבני נתונים 2018 ב מועד ב.docx",
+              "locator": "ברירה 3"
+            }
+          },
+          {
+            "exam": "2018b-b",
+            "question": "ברירה 9",
+            "points": 6,
+            "source": {
+              "file": "מבחנים לדוגמה/בחינה במבני נתונים 2018 ב מועד ב.docx",
+              "locator": "ברירה 9"
+            }
+          },
+          {
+            "exam": "2018s-a",
+            "question": "ברירה 3",
+            "points": 6,
+            "source": {
+              "file": "מבחנים לדוגמה/623411_full.pdf",
+              "locator": "PDF page 4; ברירה 3"
+            }
+          },
+          {
+            "exam": "2018s-b",
+            "question": "ברירה 6",
+            "points": 6,
+            "source": {
+              "file": "מבחנים לדוגמה/סמסטר ג מועד ב - 2018.pdf",
+              "locator": "PDF page 5; ברירה 6"
+            }
+          },
+          {
+            "exam": "2018s-c",
+            "question": "ברירה 7",
+            "points": 6,
+            "source": {
+              "file": "מבחנים לדוגמה/תמר 1 עד 6.pdf",
+              "locator": "PDF page 5; ברירה 7"
+            }
+          },
+          {
+            "exam": "2018s-c",
+            "question": "ברירה 9",
+            "points": 6,
+            "source": {
+              "file": "מבחנים לדוגמה/תמר 1 עד 6.pdf",
+              "locator": "PDF page 6; ברירה 9"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "dnc",
+      "name": "הפרד ומשול ונוסחאות נסיגה",
+      "syllabus": {
+        "file": "Syllabus_HE.pdf",
+        "page": 2,
+        "entry": "גישת הפרד ומשול"
+      },
+      "lecture": {
+        "file": "הרצאות/PDF/מצגת 2 - הפרד ומשול.pdf",
+        "pages": 65
+      },
+      "subtopics": [
+        "מיון מיזוג",
+        "ספירת היפוכים",
+        "נקודת שבת",
+        "MaxMin",
+        "חזקה מהירה",
+        "איטרציה",
+        "עץ רקורסיה",
+        "משפט האב + מקרה 2 מורחב",
+        "הצבה n=2^t",
+        "חסימה משני צדדים",
+        "הרצת מניות",
+        "כפל ארוך (Karatsuba)"
+      ],
+      "subtopicVerification": "legacy candidate list crosschecked at heading level; not a claim that every named detail has been visually checked",
+      "practiceSourcesCandidate": "תרגול 3 ×2, מטלה לא להגשה 2",
+      "priority": "A",
+      "priorityReason": "נושא מפורש בסילבוס; 23 מתוך 24 מבחני המדגם, 31 שאלות ראשיות, 265 נקודות ידועות. כלי חוזר לפתרון או ניתוח אלגוריתמים.",
+      "frequency": {
+        "topic": "dnc",
+        "name": "הפרד ומשול ונוסחאות נסיגה",
+        "questionCount": 31,
+        "examCount": 23,
+        "denominator": 24,
+        "knownPoints": 265,
+        "evidence": [
+          {
+            "exam": "2026b-b",
+            "question": "ברירה 2",
+            "points": 7,
+            "source": {
+              "file": "בחינה במבני נתונים 2026 ב מועד ב.docx",
+              "locator": "ברירה 2",
+              "xmlParagraph": 41
+            }
+          },
+          {
+            "exam": "2026b-a",
+            "question": "ברירה 7",
+            "points": 7,
+            "source": {
+              "file": "בחינה במבני נתונים 2026 ב מועד א.docx",
+              "locator": "ברירה 7",
+              "xmlParagraph": 76
+            }
+          },
+          {
+            "exam": "2026a-b",
+            "question": "ברירה 2",
+            "points": 7,
+            "source": {
+              "file": "בחינה במבני נתונים 2026 א מועד ב.docx",
+              "locator": "ברירה 2",
+              "xmlParagraph": 35
+            }
+          },
+          {
+            "exam": "2026a-a",
+            "question": "ברירה 2",
+            "points": 7,
+            "source": {
+              "file": "בחינה במבני נתונים 2026 א מועד א.docx",
+              "locator": "ברירה 2",
+              "xmlParagraph": 57
+            }
+          },
+          {
+            "exam": "2025a-a",
+            "question": "ברירה 4",
+            "points": 7,
+            "source": {
+              "file": "מבחנים לדוגמה/בחינה במבני נתונים 2025 א  מועד א.docx",
+              "locator": "ברירה 4"
+            }
+          },
+          {
+            "exam": "2025a-b",
+            "question": "ברירה 7",
+            "points": 7,
+            "source": {
+              "file": "מבחנים לדוגמה/בחינה במבני נתונים 2025 א  מועד ב.docx",
+              "locator": "ברירה 7"
+            }
+          },
+          {
+            "exam": "2024s-a",
+            "question": "פתוחה 1",
+            "points": 26,
+            "source": {
+              "file": "מבחנים לדוגמה/בחינה במבני נתונים 2024 קיץ  מועד א.docx",
+              "locator": "פתוחה 1"
+            }
+          },
+          {
+            "exam": "2024s-a",
+            "question": "ברירה 1",
+            "points": 7,
+            "source": {
+              "file": "מבחנים לדוגמה/בחינה במבני נתונים 2024 קיץ  מועד א.docx",
+              "locator": "ברירה 1"
+            }
+          },
+          {
+            "exam": "2024s-a",
+            "question": "ברירה 4",
+            "points": 7,
+            "source": {
+              "file": "מבחנים לדוגמה/בחינה במבני נתונים 2024 קיץ  מועד א.docx",
+              "locator": "ברירה 4"
+            }
+          },
+          {
+            "exam": "2024s-b",
+            "question": "פתוחה 1",
+            "points": 26,
+            "source": {
+              "file": "מבחנים לדוגמה/בחינה במבני נתונים 2024 קיץ  מועד ב.docx",
+              "locator": "פתוחה 1"
+            }
+          },
+          {
+            "exam": "2024b-a",
+            "question": "ברירה 1",
+            "points": 7,
+            "source": {
+              "file": "מבחנים לדוגמה/בחינה במבני נתונים 2024 ב  מועד א.docx",
+              "locator": "ברירה 1"
+            }
+          },
+          {
+            "exam": "2024b-b",
+            "question": "ברירה 4",
+            "points": 7,
+            "source": {
+              "file": "מבחנים לדוגמה/מבחן מבני נתונים 2024ב מועד ב - מקודד.docx",
+              "locator": "ברירה 4"
+            }
+          },
+          {
+            "exam": "2023b-a",
+            "question": "ברירה 7",
+            "points": 7,
+            "source": {
+              "file": "מבחנים לדוגמה/בחינה במבני נתונים  2023 ב  מועד א.docx",
+              "locator": "ברירה 7"
+            }
+          },
+          {
+            "exam": "2022b-a",
+            "question": "ברירה 4",
+            "points": 6,
+            "source": {
+              "file": "מבחנים לדוגמה/בחינה במבני נתונים 2022 ב מועד א.docx",
+              "locator": "ברירה 4"
+            }
+          },
+          {
+            "exam": "2022s-a",
+            "question": "ברירה 4",
+            "points": 6,
+            "source": {
+              "file": "מבחנים לדוגמה/בחינה במבני נתונים  2022 קיץ  מועד א.docx",
+              "locator": "ברירה 4"
+            }
+          },
+          {
+            "exam": "2022s-b",
+            "question": "ברירה 1",
+            "points": 6,
+            "source": {
+              "file": "מבחנים לדוגמה/בחינה במבני נתונים  2022 קיץ  מועד ב.docx",
+              "locator": "ברירה 1"
+            }
+          },
+          {
+            "exam": "2019b-a",
+            "question": "פתוחה 1",
+            "points": 20,
+            "source": {
+              "file": "מבחנים לדוגמה/בחינה במבני נתונים 2019 ב מועד א.docx",
+              "locator": "פתוחה 1"
+            }
+          },
+          {
+            "exam": "2019b-b",
+            "question": "ברירה 3",
+            "points": 6,
+            "source": {
+              "file": "מבחנים לדוגמה/בחינה במבני נתונים 2019 ב מועד ב.docx",
+              "locator": "ברירה 3"
+            }
+          },
+          {
+            "exam": "2019b-b",
+            "question": "ברירה 6",
+            "points": 6,
+            "source": {
+              "file": "מבחנים לדוגמה/בחינה במבני נתונים 2019 ב מועד ב.docx",
+              "locator": "ברירה 6"
+            }
+          },
+          {
+            "exam": "2019s-a",
+            "question": "ברירה 3",
+            "points": 6,
+            "source": {
+              "file": "מבחנים לדוגמה/מבני נתונים 2019 קיץ מועד א.docx",
+              "locator": "ברירה 3"
+            }
+          },
+          {
+            "exam": "2019s-b",
+            "question": "ברירה 2",
+            "points": 6,
+            "source": {
+              "file": "מבחנים לדוגמה/מבני נתונים 2019 קיץ מועד ב.docx",
+              "locator": "ברירה 2"
+            }
+          },
+          {
+            "exam": "2019s-b",
+            "question": "ברירה 9",
+            "points": 6,
+            "source": {
+              "file": "מבחנים לדוגמה/מבני נתונים 2019 קיץ מועד ב.docx",
+              "locator": "ברירה 9"
+            }
+          },
+          {
+            "exam": "2018b-a",
+            "question": "ברירה 8",
+            "points": 6,
+            "source": {
+              "file": "מבחנים לדוגמה/בחינה במבני נתונים 2018 ב מועד א.docx",
+              "locator": "ברירה 8"
+            }
+          },
+          {
+            "exam": "2018b-b",
+            "question": "ברירה 4",
+            "points": 6,
+            "source": {
+              "file": "מבחנים לדוגמה/בחינה במבני נתונים 2018 ב מועד ב.docx",
+              "locator": "ברירה 4"
+            }
+          },
+          {
+            "exam": "2018s-a",
+            "question": "ברירה 9",
+            "points": 6,
+            "source": {
+              "file": "מבחנים לדוגמה/623411_full.pdf",
+              "locator": "PDF page 6; ברירה 9"
+            }
+          },
+          {
+            "exam": "2018s-b",
+            "question": "ברירה 3",
+            "points": 6,
+            "source": {
+              "file": "מבחנים לדוגמה/סמסטר ג מועד ב - 2018.pdf",
+              "locator": "PDF page 4; ברירה 3"
+            }
+          },
+          {
+            "exam": "2018s-b",
+            "question": "ברירה 5",
+            "points": 6,
+            "source": {
+              "file": "מבחנים לדוגמה/סמסטר ג מועד ב - 2018.pdf",
+              "locator": "PDF page 5; ברירה 5"
+            }
+          },
+          {
+            "exam": "2018s-b",
+            "question": "ברירה 9",
+            "points": 6,
+            "source": {
+              "file": "מבחנים לדוגמה/סמסטר ג מועד ב - 2018.pdf",
+              "locator": "PDF page 7; ברירה 9"
+            }
+          },
+          {
+            "exam": "2018s-c",
+            "question": "פתוחה 2",
+            "points": 20,
+            "source": {
+              "file": "מבחנים לדוגמה/תמר 1 עד 6.pdf",
+              "locator": "PDF page 2; פתוחה 2"
+            }
+          },
+          {
+            "exam": "2018s-c",
+            "question": "ברירה 6",
+            "points": 6,
+            "source": {
+              "file": "מבחנים לדוגמה/תמר 1 עד 6.pdf",
+              "locator": "PDF page 4; ברירה 6"
+            }
+          },
+          {
+            "exam": "2018s-c",
+            "question": "ברירה 8",
+            "points": 6,
+            "source": {
+              "file": "מבחנים לדוגמה/תמר 1 עד 6.pdf",
+              "locator": "PDF page 5; ברירה 8"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "qs",
+      "name": "מיון מהיר, חציון ובחירה",
+      "syllabus": {
+        "file": "Syllabus_HE.pdf",
+        "page": 2,
+        "entry": "מיון מהיר, חציון ובעיית הבחירה"
+      },
+      "lecture": {
+        "file": "הרצאות/PDF/מצגת 3 - מיון מהיר חציון ובחירה.pdf",
+        "pages": 19
+      },
+      "subtopics": [
+        "Quick-Sort",
+        "Partition בגרסת Hoare",
+        "ניתוח מקרה טוב/גרוע/יחס קבוע",
+        "Select",
+        "חציון החציונים",
+        "איבר רוב"
+      ],
+      "subtopicVerification": "legacy candidate list crosschecked at heading level; not a claim that every named detail has been visually checked",
+      "practiceSourcesCandidate": "תרגול 4 + quicksort.c, מטלה לא להגשה 3",
+      "priority": "A",
+      "priorityReason": "נושא מפורש בסילבוס; 19 מתוך 24 מבחני המדגם, 24 שאלות ראשיות, 215 נקודות ידועות. כלי חוזר לפתרון או ניתוח אלגוריתמים.",
+      "frequency": {
+        "topic": "qs",
+        "name": "מיון מהיר, חציון ובעיית הבחירה",
+        "questionCount": 24,
+        "examCount": 19,
+        "denominator": 24,
+        "knownPoints": 215,
+        "evidence": [
+          {
+            "exam": "2026b-b",
+            "question": "ברירה 4",
+            "points": 7,
+            "source": {
+              "file": "בחינה במבני נתונים 2026 ב מועד ב.docx",
+              "locator": "ברירה 4",
+              "xmlParagraph": 57
+            }
+          },
+          {
+            "exam": "2026a-b",
+            "question": "ברירה 1",
+            "points": 7,
+            "source": {
+              "file": "בחינה במבני נתונים 2026 א מועד ב.docx",
+              "locator": "ברירה 1",
+              "xmlParagraph": 26
+            }
+          },
+          {
+            "exam": "2026a-a",
+            "question": "ברירה 4",
+            "points": 7,
+            "source": {
+              "file": "בחינה במבני נתונים 2026 א מועד א.docx",
+              "locator": "ברירה 4",
+              "xmlParagraph": 86
+            }
+          },
+          {
+            "exam": "2026a-a",
+            "question": "ברירה 6",
+            "points": 7,
+            "source": {
+              "file": "בחינה במבני נתונים 2026 א מועד א.docx",
+              "locator": "ברירה 6",
+              "xmlParagraph": 130
+            }
+          },
+          {
+            "exam": "2025a-a",
+            "question": "ברירה 7",
+            "points": 7,
+            "source": {
+              "file": "מבחנים לדוגמה/בחינה במבני נתונים 2025 א  מועד א.docx",
+              "locator": "ברירה 7"
+            }
+          },
+          {
+            "exam": "2025a-b",
+            "question": "ברירה 3",
+            "points": 7,
+            "source": {
+              "file": "מבחנים לדוגמה/בחינה במבני נתונים 2025 א  מועד ב.docx",
+              "locator": "ברירה 3"
+            }
+          },
+          {
+            "exam": "2024s-a",
+            "question": "ברירה 7",
+            "points": 7,
+            "source": {
+              "file": "מבחנים לדוגמה/בחינה במבני נתונים 2024 קיץ  מועד א.docx",
+              "locator": "ברירה 7"
+            }
+          },
+          {
+            "exam": "2024s-b",
+            "question": "ברירה 7",
+            "points": 7,
+            "source": {
+              "file": "מבחנים לדוגמה/בחינה במבני נתונים 2024 קיץ  מועד ב.docx",
+              "locator": "ברירה 7"
+            }
+          },
+          {
+            "exam": "2024b-a",
+            "question": "ברירה 4",
+            "points": 7,
+            "source": {
+              "file": "מבחנים לדוגמה/בחינה במבני נתונים 2024 ב  מועד א.docx",
+              "locator": "ברירה 4"
+            }
+          },
+          {
+            "exam": "2022b-a",
+            "question": "ברירה 5",
+            "points": 6,
+            "source": {
+              "file": "מבחנים לדוגמה/בחינה במבני נתונים 2022 ב מועד א.docx",
+              "locator": "ברירה 5"
+            }
+          },
+          {
+            "exam": "2022s-a",
+            "question": "ברירה 8",
+            "points": 6,
+            "source": {
+              "file": "מבחנים לדוגמה/בחינה במבני נתונים  2022 קיץ  מועד א.docx",
+              "locator": "ברירה 8"
+            }
+          },
+          {
+            "exam": "2022s-b",
+            "question": "פתוחה 1",
+            "points": 26,
+            "source": {
+              "file": "מבחנים לדוגמה/בחינה במבני נתונים  2022 קיץ  מועד ב.docx",
+              "locator": "פתוחה 1"
+            }
+          },
+          {
+            "exam": "2022s-b",
+            "question": "ברירה 6",
+            "points": 6,
+            "source": {
+              "file": "מבחנים לדוגמה/בחינה במבני נתונים  2022 קיץ  מועד ב.docx",
+              "locator": "ברירה 6"
+            }
+          },
+          {
+            "exam": "2019b-a",
+            "question": "ברירה 1",
+            "points": 6,
+            "source": {
+              "file": "מבחנים לדוגמה/בחינה במבני נתונים 2019 ב מועד א.docx",
+              "locator": "ברירה 1"
+            }
+          },
+          {
+            "exam": "2019b-b",
+            "question": "פתוחה 1",
+            "points": 20,
+            "source": {
+              "file": "מבחנים לדוגמה/בחינה במבני נתונים 2019 ב מועד ב.docx",
+              "locator": "פתוחה 1"
+            }
+          },
+          {
+            "exam": "2019b-b",
+            "question": "ברירה 1",
+            "points": 6,
+            "source": {
+              "file": "מבחנים לדוגמה/בחינה במבני נתונים 2019 ב מועד ב.docx",
+              "locator": "ברירה 1"
+            }
+          },
+          {
+            "exam": "2019s-a",
+            "question": "פתוחה 1",
+            "points": 20,
+            "source": {
+              "file": "מבחנים לדוגמה/מבני נתונים 2019 קיץ מועד א.docx",
+              "locator": "פתוחה 1"
+            }
+          },
+          {
+            "exam": "2019s-a",
+            "question": "ברירה 8",
+            "points": 6,
+            "source": {
+              "file": "מבחנים לדוגמה/מבני נתונים 2019 קיץ מועד א.docx",
+              "locator": "ברירה 8"
+            }
+          },
+          {
+            "exam": "2019s-a",
+            "question": "ברירה 9",
+            "points": 6,
+            "source": {
+              "file": "מבחנים לדוגמה/מבני נתונים 2019 קיץ מועד א.docx",
+              "locator": "ברירה 9"
+            }
+          },
+          {
+            "exam": "2019s-b",
+            "question": "פתוחה 1",
+            "points": 20,
+            "source": {
+              "file": "מבחנים לדוגמה/מבני נתונים 2019 קיץ מועד ב.docx",
+              "locator": "פתוחה 1"
+            }
+          },
+          {
+            "exam": "2018b-a",
+            "question": "ברירה 6",
+            "points": 6,
+            "source": {
+              "file": "מבחנים לדוגמה/בחינה במבני נתונים 2018 ב מועד א.docx",
+              "locator": "ברירה 6"
+            }
+          },
+          {
+            "exam": "2018s-a",
+            "question": "ברירה 2",
+            "points": 6,
+            "source": {
+              "file": "מבחנים לדוגמה/623411_full.pdf",
+              "locator": "PDF page 4; ברירה 2"
+            }
+          },
+          {
+            "exam": "2018s-b",
+            "question": "ברירה 2",
+            "points": 6,
+            "source": {
+              "file": "מבחנים לדוגמה/סמסטר ג מועד ב - 2018.pdf",
+              "locator": "PDF page 3; ברירה 2"
+            }
+          },
+          {
+            "exam": "2018s-c",
+            "question": "ברירה 2",
+            "points": 6,
+            "source": {
+              "file": "מבחנים לדוגמה/תמר 1 עד 6.pdf",
+              "locator": "PDF page 3; ברירה 2"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "stq",
+      "name": "מחסנית ותור",
+      "syllabus": {
+        "file": "Syllabus_HE.pdf",
+        "page": 2,
+        "entry": "מחסנית ותור"
+      },
+      "lecture": {
+        "file": "הרצאות/PDF/מצגת 4 - מחסנית ותור.pdf",
+        "pages": 24
+      },
+      "subtopics": [
+        "ADT",
+        "מחסנית LIFO",
+        "שתי מחסניות במערך אחד",
+        "בדיקת סוגריים",
+        "Stack_AB",
+        "תור FIFO",
+        "תור מעגלי",
+        "תור בשתי מחסניות (אמורטי)",
+        "פלינדרום"
+      ],
+      "subtopicVerification": "legacy candidate list crosschecked at heading level; not a claim that every named detail has been visually checked",
+      "practiceSourcesCandidate": "תרגול 6 ×2, מטלה 4, מטלת ריצה 2",
+      "priority": "C",
+      "priorityReason": "נושא מפורש בסילבוס; 14 מתוך 24 מבחני המדגם, 15 שאלות ראשיות, 96 נקודות ידועות. בסיס לנושאים המתקדמים; אין לדלג גם אם ההשקעה הייעודית קצרה יותר.",
+      "frequency": {
+        "topic": "stq",
+        "name": "מחסנית ותור",
+        "questionCount": 15,
+        "examCount": 14,
+        "denominator": 24,
+        "knownPoints": 96,
+        "evidence": [
+          {
+            "exam": "2026b-b",
+            "question": "ברירה 6",
+            "points": 7,
+            "source": {
+              "file": "בחינה במבני נתונים 2026 ב מועד ב.docx",
+              "locator": "ברירה 6",
+              "xmlParagraph": 72
+            }
+          },
+          {
+            "exam": "2026b-a",
+            "question": "ברירה 4",
+            "points": 7,
+            "source": {
+              "file": "בחינה במבני נתונים 2026 ב מועד א.docx",
+              "locator": "ברירה 4",
+              "xmlParagraph": 49
+            }
+          },
+          {
+            "exam": "2026a-b",
+            "question": "ברירה 7",
+            "points": 7,
+            "source": {
+              "file": "בחינה במבני נתונים 2026 א מועד ב.docx",
+              "locator": "ברירה 7",
+              "xmlParagraph": 82
+            }
+          },
+          {
+            "exam": "2025a-a",
+            "question": "ברירה 6",
+            "points": 7,
+            "source": {
+              "file": "מבחנים לדוגמה/בחינה במבני נתונים 2025 א  מועד א.docx",
+              "locator": "ברירה 6"
+            }
+          },
+          {
+            "exam": "2024b-a",
+            "question": "ברירה 7",
+            "points": 7,
+            "source": {
+              "file": "מבחנים לדוגמה/בחינה במבני נתונים 2024 ב  מועד א.docx",
+              "locator": "ברירה 7"
+            }
+          },
+          {
+            "exam": "2024b-b",
+            "question": "ברירה 6",
+            "points": 7,
+            "source": {
+              "file": "מבחנים לדוגמה/מבחן מבני נתונים 2024ב מועד ב - מקודד.docx",
+              "locator": "ברירה 6"
+            }
+          },
+          {
+            "exam": "2022b-a",
+            "question": "ברירה 7",
+            "points": 6,
+            "source": {
+              "file": "מבחנים לדוגמה/בחינה במבני נתונים 2022 ב מועד א.docx",
+              "locator": "ברירה 7"
+            }
+          },
+          {
+            "exam": "2022s-b",
+            "question": "ברירה 3",
+            "points": 6,
+            "source": {
+              "file": "מבחנים לדוגמה/בחינה במבני נתונים  2022 קיץ  מועד ב.docx",
+              "locator": "ברירה 3"
+            }
+          },
+          {
+            "exam": "2019b-b",
+            "question": "ברירה 7",
+            "points": 6,
+            "source": {
+              "file": "מבחנים לדוגמה/בחינה במבני נתונים 2019 ב מועד ב.docx",
+              "locator": "ברירה 7"
+            }
+          },
+          {
+            "exam": "2019s-b",
+            "question": "ברירה 8",
+            "points": 6,
+            "source": {
+              "file": "מבחנים לדוגמה/מבני נתונים 2019 קיץ מועד ב.docx",
+              "locator": "ברירה 8"
+            }
+          },
+          {
+            "exam": "2018b-a",
+            "question": "ברירה 9",
+            "points": 6,
+            "source": {
+              "file": "מבחנים לדוגמה/בחינה במבני נתונים 2018 ב מועד א.docx",
+              "locator": "ברירה 9"
+            }
+          },
+          {
+            "exam": "2018b-b",
+            "question": "ברירה 8",
+            "points": 6,
+            "source": {
+              "file": "מבחנים לדוגמה/בחינה במבני נתונים 2018 ב מועד ב.docx",
+              "locator": "ברירה 8"
+            }
+          },
+          {
+            "exam": "2018s-a",
+            "question": "ברירה 1",
+            "points": 6,
+            "source": {
+              "file": "מבחנים לדוגמה/623411_full.pdf",
+              "locator": "PDF page 4; ברירה 1"
+            }
+          },
+          {
+            "exam": "2018s-a",
+            "question": "ברירה 6",
+            "points": 6,
+            "source": {
+              "file": "מבחנים לדוגמה/623411_full.pdf",
+              "locator": "PDF page 5; ברירה 6"
+            }
+          },
+          {
+            "exam": "2018s-b",
+            "question": "ברירה 1",
+            "points": 6,
+            "source": {
+              "file": "מבחנים לדוגמה/סמסטר ג מועד ב - 2018.pdf",
+              "locator": "PDF page 3; ברירה 1"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "list",
+      "name": "רשימות מקושרות",
+      "syllabus": {
+        "file": "Syllabus_HE.pdf",
+        "page": 2,
+        "entry": "רשימה מקושרת ועץ בינרי"
+      },
+      "lecture": {
+        "file": "הרצאות/PDF/מצגת 5 - רשימה מקושרת ועצים בינריים.pdf",
+        "pages": 30
+      },
+      "subtopics": [
+        "חד/דו/מעגלית",
+        "Search/Insert/Delete",
+        "מימוש מחסנית ותור",
+        "דפוס שני מצביעים",
+        "אילוצי זיכרון O(1)"
+      ],
+      "subtopicVerification": "legacy candidate list crosschecked at heading level; not a claim that every named detail has been visually checked",
+      "practiceSourcesCandidate": "תרגול 8, מטלה לא להגשה 5",
+      "priority": "B",
+      "priorityReason": "נושא מפורש בסילבוס; 10 מתוך 24 מבחני המדגם, 10 שאלות ראשיות, 161 נקודות ידועות. בסיס לנושאים המתקדמים; אין לדלג גם אם ההשקעה הייעודית קצרה יותר.",
+      "frequency": {
+        "topic": "list",
+        "name": "רשימות מקושרות",
+        "questionCount": 10,
+        "examCount": 10,
+        "denominator": 24,
+        "knownPoints": 161,
+        "evidence": [
+          {
+            "exam": "2026b-b",
+            "question": "פתוחה 1",
+            "points": 26,
+            "source": {
+              "file": "בחינה במבני נתונים 2026 ב מועד ב.docx",
+              "locator": "פתוחה 1",
+              "xmlParagraph": 6
+            }
+          },
+          {
+            "exam": "2026b-a",
+            "question": "פתוחה 1",
+            "points": 26,
+            "source": {
+              "file": "בחינה במבני נתונים 2026 ב מועד א.docx",
+              "locator": "פתוחה 1",
+              "xmlParagraph": 6
+            }
+          },
+          {
+            "exam": "2025a-a",
+            "question": "פתוחה 1",
+            "points": 26,
+            "source": {
+              "file": "מבחנים לדוגמה/בחינה במבני נתונים 2025 א  מועד א.docx",
+              "locator": "פתוחה 1"
+            }
+          },
+          {
+            "exam": "2025a-b",
+            "question": "פתוחה 1",
+            "points": 26,
+            "source": {
+              "file": "מבחנים לדוגמה/בחינה במבני נתונים 2025 א  מועד ב.docx",
+              "locator": "פתוחה 1"
+            }
+          },
+          {
+            "exam": "2024s-b",
+            "question": "ברירה 6",
+            "points": 7,
+            "source": {
+              "file": "מבחנים לדוגמה/בחינה במבני נתונים 2024 קיץ  מועד ב.docx",
+              "locator": "ברירה 6"
+            }
+          },
+          {
+            "exam": "2023b-a",
+            "question": "פתוחה 1",
+            "points": 26,
+            "source": {
+              "file": "מבחנים לדוגמה/בחינה במבני נתונים  2023 ב  מועד א.docx",
+              "locator": "פתוחה 1"
+            }
+          },
+          {
+            "exam": "2022s-a",
+            "question": "ברירה 6",
+            "points": 6,
+            "source": {
+              "file": "מבחנים לדוגמה/בחינה במבני נתונים  2022 קיץ  מועד א.docx",
+              "locator": "ברירה 6"
+            }
+          },
+          {
+            "exam": "2022s-b",
+            "question": "ברירה 5",
+            "points": 6,
+            "source": {
+              "file": "מבחנים לדוגמה/בחינה במבני נתונים  2022 קיץ  מועד ב.docx",
+              "locator": "ברירה 5"
+            }
+          },
+          {
+            "exam": "2018b-b",
+            "question": "ברירה 10",
+            "points": 6,
+            "source": {
+              "file": "מבחנים לדוגמה/בחינה במבני נתונים 2018 ב מועד ב.docx",
+              "locator": "ברירה 10"
+            }
+          },
+          {
+            "exam": "2018s-c",
+            "question": "ברירה 4",
+            "points": 6,
+            "source": {
+              "file": "מבחנים לדוגמה/תמר 1 עד 6.pdf",
+              "locator": "PDF page 4; ברירה 4"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "bt",
+      "name": "עצים בינאריים וסריקות",
+      "syllabus": {
+        "file": "Syllabus_HE.pdf",
+        "page": 2,
+        "entry": "רשימה מקושרת ועץ בינרי"
+      },
+      "lecture": {
+        "file": "הרצאות/PDF/מצגת 5 - רשימה מקושרת ועצים בינריים.pdf",
+        "pages": 30
+      },
+      "subtopics": [
+        "מונחי עצים",
+        "ארבעת סוגי העצים הבינאריים",
+        "PreOrder/InOrder/PostOrder",
+        "שחזור עץ מסריקות",
+        "Tree-Nodes",
+        "Tree-Height",
+        "התבנית הרקורסיבית",
+        "קוטר",
+        "ISO"
+      ],
+      "subtopicVerification": "legacy candidate list crosschecked at heading level; not a claim that every named detail has been visually checked",
+      "practiceSourcesCandidate": "תרגול 8, תרגול 9",
+      "priority": "B",
+      "priorityReason": "נושא מפורש בסילבוס; 9 מתוך 24 מבחני המדגם, 12 שאלות ראשיות, 152 נקודות ידועות. בסיס לנושאים המתקדמים; אין לדלג גם אם ההשקעה הייעודית קצרה יותר.",
+      "frequency": {
+        "topic": "bt",
+        "name": "עצים בינאריים וסריקות",
+        "questionCount": 12,
+        "examCount": 9,
+        "denominator": 24,
+        "knownPoints": 152,
+        "evidence": [
+          {
+            "exam": "2026a-a",
+            "question": "פתוחה 1",
+            "points": 26,
+            "source": {
+              "file": "בחינה במבני נתונים 2026 א מועד א.docx",
+              "locator": "פתוחה 1",
+              "xmlParagraph": 7
+            }
+          },
+          {
+            "exam": "2026a-a",
+            "question": "ברירה 3",
+            "points": 7,
+            "source": {
+              "file": "בחינה במבני נתונים 2026 א מועד א.docx",
+              "locator": "ברירה 3",
+              "xmlParagraph": 75
+            }
+          },
+          {
+            "exam": "2026a-a",
+            "question": "ברירה 7",
+            "points": 7,
+            "source": {
+              "file": "בחינה במבני נתונים 2026 א מועד א.docx",
+              "locator": "ברירה 7",
+              "xmlParagraph": 136
+            }
+          },
+          {
+            "exam": "2024s-b",
+            "question": "ברירה 4",
+            "points": 7,
+            "source": {
+              "file": "מבחנים לדוגמה/בחינה במבני נתונים 2024 קיץ  מועד ב.docx",
+              "locator": "ברירה 4"
+            }
+          },
+          {
+            "exam": "2024b-a",
+            "question": "ברירה 5",
+            "points": 7,
+            "source": {
+              "file": "מבחנים לדוגמה/בחינה במבני נתונים 2024 ב  מועד א.docx",
+              "locator": "ברירה 5"
+            }
+          },
+          {
+            "exam": "2024b-b",
+            "question": "פתוחה 1",
+            "points": 26,
+            "source": {
+              "file": "מבחנים לדוגמה/מבחן מבני נתונים 2024ב מועד ב - מקודד.docx",
+              "locator": "פתוחה 1"
+            }
+          },
+          {
+            "exam": "2024b-b",
+            "question": "ברירה 1",
+            "points": 7,
+            "source": {
+              "file": "מבחנים לדוגמה/מבחן מבני נתונים 2024ב מועד ב - מקודד.docx",
+              "locator": "ברירה 1"
+            }
+          },
+          {
+            "exam": "2023b-a",
+            "question": "ברירה 6",
+            "points": 7,
+            "source": {
+              "file": "מבחנים לדוגמה/בחינה במבני נתונים  2023 ב  מועד א.docx",
+              "locator": "ברירה 6"
+            }
+          },
+          {
+            "exam": "2023b-b",
+            "question": "פתוחה 1",
+            "points": 26,
+            "source": {
+              "file": "מבחנים לדוגמה/פתרון בחינה במבני נתונים  2023 ב  מועד ב.docx",
+              "locator": "פתוחה 1"
+            }
+          },
+          {
+            "exam": "2019b-a",
+            "question": "ברירה 5",
+            "points": 6,
+            "source": {
+              "file": "מבחנים לדוגמה/בחינה במבני נתונים 2019 ב מועד א.docx",
+              "locator": "ברירה 5"
+            }
+          },
+          {
+            "exam": "2019b-b",
+            "question": "פתוחה 2",
+            "points": 20,
+            "source": {
+              "file": "מבחנים לדוגמה/בחינה במבני נתונים 2019 ב מועד ב.docx",
+              "locator": "פתוחה 2"
+            }
+          },
+          {
+            "exam": "2018b-b",
+            "question": "ברירה 2",
+            "points": 6,
+            "source": {
+              "file": "מבחנים לדוגמה/בחינה במבני נתונים 2018 ב מועד ב.docx",
+              "locator": "ברירה 2"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "bst",
+      "name": "עצי חיפוש בינאריים",
+      "syllabus": {
+        "file": "Syllabus_HE.pdf",
+        "page": 3,
+        "entry": "עץ חיפוש בינרי ועץ AVL"
+      },
+      "lecture": {
+        "file": "הרצאות/PDF/מצגת 5 - רשימה מקושרת ועצים בינריים.pdf",
+        "pages": 30
+      },
+      "subtopics": [
+        "תכונת ה-BST",
+        "Search/Min/Max/Successor/Predecessor",
+        "Insert",
+        "Delete בשלושת המקרים",
+        "O(h) מול O(log n)",
+        "מיון ע\"י BST"
+      ],
+      "subtopicVerification": "legacy candidate list crosschecked at heading level; not a claim that every named detail has been visually checked",
+      "practiceSourcesCandidate": "תרגול 9, מטלה לא להגשה 6",
+      "priority": "B",
+      "priorityReason": "נושא מפורש בסילבוס; 10 מתוך 24 מבחני המדגם, 12 שאלות ראשיות, 94 נקודות ידועות. בסיס לנושאים המתקדמים; אין לדלג גם אם ההשקעה הייעודית קצרה יותר.",
+      "frequency": {
+        "topic": "bst",
+        "name": "עצי חיפוש בינאריים",
+        "questionCount": 12,
+        "examCount": 10,
+        "denominator": 24,
+        "knownPoints": 94,
+        "evidence": [
+          {
+            "exam": "2024b-b",
+            "question": "ברירה 5",
+            "points": 7,
+            "source": {
+              "file": "מבחנים לדוגמה/מבחן מבני נתונים 2024ב מועד ב - מקודד.docx",
+              "locator": "ברירה 5"
+            }
+          },
+          {
+            "exam": "2023b-b",
+            "question": "ברירה 5",
+            "points": 7,
+            "source": {
+              "file": "מבחנים לדוגמה/פתרון בחינה במבני נתונים  2023 ב  מועד ב.docx",
+              "locator": "ברירה 5"
+            }
+          },
+          {
+            "exam": "2022b-a",
+            "question": "ברירה 8",
+            "points": 6,
+            "source": {
+              "file": "מבחנים לדוגמה/בחינה במבני נתונים 2022 ב מועד א.docx",
+              "locator": "ברירה 8"
+            }
+          },
+          {
+            "exam": "2022s-a",
+            "question": "פתוחה 1",
+            "points": 26,
+            "source": {
+              "file": "מבחנים לדוגמה/בחינה במבני נתונים  2022 קיץ  מועד א.docx",
+              "locator": "פתוחה 1"
+            }
+          },
+          {
+            "exam": "2022s-a",
+            "question": "ברירה 7",
+            "points": 6,
+            "source": {
+              "file": "מבחנים לדוגמה/בחינה במבני נתונים  2022 קיץ  מועד א.docx",
+              "locator": "ברירה 7"
+            }
+          },
+          {
+            "exam": "2022s-b",
+            "question": "ברירה 4",
+            "points": 6,
+            "source": {
+              "file": "מבחנים לדוגמה/בחינה במבני נתונים  2022 קיץ  מועד ב.docx",
+              "locator": "ברירה 4"
+            }
+          },
+          {
+            "exam": "2019b-a",
+            "question": "ברירה 2",
+            "points": 6,
+            "source": {
+              "file": "מבחנים לדוגמה/בחינה במבני נתונים 2019 ב מועד א.docx",
+              "locator": "ברירה 2"
+            }
+          },
+          {
+            "exam": "2019s-a",
+            "question": "ברירה 6",
+            "points": 6,
+            "source": {
+              "file": "מבחנים לדוגמה/מבני נתונים 2019 קיץ מועד א.docx",
+              "locator": "ברירה 6"
+            }
+          },
+          {
+            "exam": "2018b-a",
+            "question": "ברירה 3",
+            "points": 6,
+            "source": {
+              "file": "מבחנים לדוגמה/בחינה במבני נתונים 2018 ב מועד א.docx",
+              "locator": "ברירה 3"
+            }
+          },
+          {
+            "exam": "2018b-b",
+            "question": "ברירה 1",
+            "points": 6,
+            "source": {
+              "file": "מבחנים לדוגמה/בחינה במבני נתונים 2018 ב מועד ב.docx",
+              "locator": "ברירה 1"
+            }
+          },
+          {
+            "exam": "2018s-b",
+            "question": "ברירה 8",
+            "points": 6,
+            "source": {
+              "file": "מבחנים לדוגמה/סמסטר ג מועד ב - 2018.pdf",
+              "locator": "PDF page 6; ברירה 8"
+            }
+          },
+          {
+            "exam": "2018s-b",
+            "question": "ברירה 10",
+            "points": 6,
+            "source": {
+              "file": "מבחנים לדוגמה/סמסטר ג מועד ב - 2018.pdf",
+              "locator": "PDF page 7; ברירה 10"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "avl",
+      "name": "עצי AVL",
+      "syllabus": {
+        "file": "Syllabus_HE.pdf",
+        "page": 3,
+        "entry": "עץ חיפוש בינרי ועץ AVL"
+      },
+      "lecture": {
+        "file": "הרצאות/PDF/מצגת 5.5 - עצי AVL.pdf",
+        "pages": 41
+      },
+      "subtopics": [
+        "גורם איזון",
+        "רוטציה בודדת וכפולה",
+        "4 מקרי הכנסה LL/LR/RR/RL",
+        "3 מקרי מחיקה",
+        "קסקדת רוטציות",
+        "מספר צמתים מינימלי בגובה h",
+        "SELECT"
+      ],
+      "subtopicVerification": "legacy candidate list crosschecked at heading level; not a claim that every named detail has been visually checked",
+      "practiceSourcesCandidate": "תרגול 10 — AVL (תרשימים), תרגול 9",
+      "priority": "B",
+      "priorityReason": "נושא מפורש בסילבוס; 18 מתוך 24 מבחני המדגם, 20 שאלות ראשיות, 167 נקודות ידועות. בסיס לנושאים המתקדמים; אין לדלג גם אם ההשקעה הייעודית קצרה יותר.",
+      "frequency": {
+        "topic": "avl",
+        "name": "עצי AVL",
+        "questionCount": 20,
+        "examCount": 18,
+        "denominator": 24,
+        "knownPoints": 167,
+        "evidence": [
+          {
+            "exam": "2026b-b",
+            "question": "ברירה 5",
+            "points": 7,
+            "source": {
+              "file": "בחינה במבני נתונים 2026 ב מועד ב.docx",
+              "locator": "ברירה 5",
+              "xmlParagraph": 66
+            }
+          },
+          {
+            "exam": "2026b-a",
+            "question": "ברירה 3",
+            "points": 7,
+            "source": {
+              "file": "בחינה במבני נתונים 2026 ב מועד א.docx",
+              "locator": "ברירה 3",
+              "xmlParagraph": 42
+            }
+          },
+          {
+            "exam": "2026a-b",
+            "question": "ברירה 6",
+            "points": 7,
+            "source": {
+              "file": "בחינה במבני נתונים 2026 א מועד ב.docx",
+              "locator": "ברירה 6",
+              "xmlParagraph": 71
+            }
+          },
+          {
+            "exam": "2026a-a",
+            "question": "ברירה 1",
+            "points": 7,
+            "source": {
+              "file": "בחינה במבני נתונים 2026 א מועד א.docx",
+              "locator": "ברירה 1",
+              "xmlParagraph": 33
+            }
+          },
+          {
+            "exam": "2025a-a",
+            "question": "ברירה 3",
+            "points": 7,
+            "source": {
+              "file": "מבחנים לדוגמה/בחינה במבני נתונים 2025 א  מועד א.docx",
+              "locator": "ברירה 3"
+            }
+          },
+          {
+            "exam": "2024s-a",
+            "question": "ברירה 3",
+            "points": 7,
+            "source": {
+              "file": "מבחנים לדוגמה/בחינה במבני נתונים 2024 קיץ  מועד א.docx",
+              "locator": "ברירה 3"
+            }
+          },
+          {
+            "exam": "2024s-b",
+            "question": "ברירה 1",
+            "points": 7,
+            "source": {
+              "file": "מבחנים לדוגמה/בחינה במבני נתונים 2024 קיץ  מועד ב.docx",
+              "locator": "ברירה 1"
+            }
+          },
+          {
+            "exam": "2023b-a",
+            "question": "ברירה 2",
+            "points": 7,
+            "source": {
+              "file": "מבחנים לדוגמה/בחינה במבני נתונים  2023 ב  מועד א.docx",
+              "locator": "ברירה 2"
+            }
+          },
+          {
+            "exam": "2023b-b",
+            "question": "ברירה 7",
+            "points": 7,
+            "source": {
+              "file": "מבחנים לדוגמה/פתרון בחינה במבני נתונים  2023 ב  מועד ב.docx",
+              "locator": "ברירה 7"
+            }
+          },
+          {
+            "exam": "2022b-a",
+            "question": "ברירה 1",
+            "points": 6,
+            "source": {
+              "file": "מבחנים לדוגמה/בחינה במבני נתונים 2022 ב מועד א.docx",
+              "locator": "ברירה 1"
+            }
+          },
+          {
+            "exam": "2022s-a",
+            "question": "ברירה 1",
+            "points": 6,
+            "source": {
+              "file": "מבחנים לדוגמה/בחינה במבני נתונים  2022 קיץ  מועד א.docx",
+              "locator": "ברירה 1"
+            }
+          },
+          {
+            "exam": "2022s-b",
+            "question": "ברירה 7",
+            "points": 6,
+            "source": {
+              "file": "מבחנים לדוגמה/בחינה במבני נתונים  2022 קיץ  מועד ב.docx",
+              "locator": "ברירה 7"
+            }
+          },
+          {
+            "exam": "2019b-a",
+            "question": "ברירה 7",
+            "points": 6,
+            "source": {
+              "file": "מבחנים לדוגמה/בחינה במבני נתונים 2019 ב מועד א.docx",
+              "locator": "ברירה 7"
+            }
+          },
+          {
+            "exam": "2019s-b",
+            "question": "ברירה 5",
+            "points": 6,
+            "source": {
+              "file": "מבחנים לדוגמה/מבני נתונים 2019 קיץ מועד ב.docx",
+              "locator": "ברירה 5"
+            }
+          },
+          {
+            "exam": "2018b-a",
+            "question": "ברירה 1",
+            "points": 6,
+            "source": {
+              "file": "מבחנים לדוגמה/בחינה במבני נתונים 2018 ב מועד א.docx",
+              "locator": "ברירה 1"
+            }
+          },
+          {
+            "exam": "2018b-a",
+            "question": "ברירה 7",
+            "points": 6,
+            "source": {
+              "file": "מבחנים לדוגמה/בחינה במבני נתונים 2018 ב מועד א.docx",
+              "locator": "ברירה 7"
+            }
+          },
+          {
+            "exam": "2018s-a",
+            "question": "פתוחה 1",
+            "points": 25,
+            "source": {
+              "file": "מבחנים לדוגמה/623411_full.pdf",
+              "locator": "PDF page 2; פתוחה 1"
+            }
+          },
+          {
+            "exam": "2018s-b",
+            "question": "פתוחה 2",
+            "points": 25,
+            "source": {
+              "file": "מבחנים לדוגמה/סמסטר ג מועד ב - 2018.pdf",
+              "locator": "PDF page 2; פתוחה 2"
+            }
+          },
+          {
+            "exam": "2018s-c",
+            "question": "ברירה 5",
+            "points": 6,
+            "source": {
+              "file": "מבחנים לדוגמה/תמר 1 עד 6.pdf",
+              "locator": "PDF page 4; ברירה 5"
+            }
+          },
+          {
+            "exam": "2018s-c",
+            "question": "ברירה 10",
+            "points": 6,
+            "source": {
+              "file": "מבחנים לדוגמה/תמר 1 עד 6.pdf",
+              "locator": "PDF page 6; ברירה 10"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "heap",
+      "name": "ערימה ותור עדיפויות",
+      "syllabus": {
+        "file": "Syllabus_HE.pdf",
+        "page": 3,
+        "entry": "ערימה"
+      },
+      "lecture": {
+        "file": "הרצאות/PDF/מצגת 6 מעודכנת - ערימה.pdf",
+        "pages": 16
+      },
+      "subtopics": [
+        "שתי תכונות הערימה",
+        "מימוש במערך",
+        "Heapify",
+        "Build-Heap והניתוח ההדוק Θ(n)",
+        "תור עדיפויות",
+        "HeapSort",
+        "גיאומטריה של הערימה",
+        "k הגדולים"
+      ],
+      "subtopicVerification": "legacy candidate list crosschecked at heading level; not a claim that every named detail has been visually checked",
+      "practiceSourcesCandidate": "תרגול 10 — ערימה, מטלה לא להגשה 7",
+      "priority": "A",
+      "priorityReason": "נושא מפורש בסילבוס; 18 מתוך 24 מבחני המדגם, 25 שאלות ראשיות, 218 נקודות ידועות. כלי חוזר לפתרון או ניתוח אלגוריתמים.",
+      "frequency": {
+        "topic": "heap",
+        "name": "ערימה ותור עדיפויות",
+        "questionCount": 25,
+        "examCount": 18,
+        "denominator": 24,
+        "knownPoints": 218,
+        "evidence": [
+          {
+            "exam": "2026b-b",
+            "question": "ברירה 3",
+            "points": 7,
+            "source": {
+              "file": "בחינה במבני נתונים 2026 ב מועד ב.docx",
+              "locator": "ברירה 3",
+              "xmlParagraph": 47
+            }
+          },
+          {
+            "exam": "2026b-a",
+            "question": "ברירה 6",
+            "points": 7,
+            "source": {
+              "file": "בחינה במבני נתונים 2026 ב מועד א.docx",
+              "locator": "ברירה 6",
+              "xmlParagraph": 67
+            }
+          },
+          {
+            "exam": "2025a-a",
+            "question": "ברירה 5",
+            "points": 7,
+            "source": {
+              "file": "מבחנים לדוגמה/בחינה במבני נתונים 2025 א  מועד א.docx",
+              "locator": "ברירה 5"
+            }
+          },
+          {
+            "exam": "2025a-b",
+            "question": "ברירה 1",
+            "points": 7,
+            "source": {
+              "file": "מבחנים לדוגמה/בחינה במבני נתונים 2025 א  מועד ב.docx",
+              "locator": "ברירה 1"
+            }
+          },
+          {
+            "exam": "2025a-b",
+            "question": "ברירה 5",
+            "points": 7,
+            "source": {
+              "file": "מבחנים לדוגמה/בחינה במבני נתונים 2025 א  מועד ב.docx",
+              "locator": "ברירה 5"
+            }
+          },
+          {
+            "exam": "2024s-a",
+            "question": "ברירה 6",
+            "points": 7,
+            "source": {
+              "file": "מבחנים לדוגמה/בחינה במבני נתונים 2024 קיץ  מועד א.docx",
+              "locator": "ברירה 6"
+            }
+          },
+          {
+            "exam": "2024b-a",
+            "question": "ברירה 6",
+            "points": 7,
+            "source": {
+              "file": "מבחנים לדוגמה/בחינה במבני נתונים 2024 ב  מועד א.docx",
+              "locator": "ברירה 6"
+            }
+          },
+          {
+            "exam": "2024b-b",
+            "question": "ברירה 2",
+            "points": 7,
+            "source": {
+              "file": "מבחנים לדוגמה/מבחן מבני נתונים 2024ב מועד ב - מקודד.docx",
+              "locator": "ברירה 2"
+            }
+          },
+          {
+            "exam": "2024b-b",
+            "question": "ברירה 7",
+            "points": 7,
+            "source": {
+              "file": "מבחנים לדוגמה/מבחן מבני נתונים 2024ב מועד ב - מקודד.docx",
+              "locator": "ברירה 7"
+            }
+          },
+          {
+            "exam": "2023b-a",
+            "question": "ברירה 1",
+            "points": 7,
+            "source": {
+              "file": "מבחנים לדוגמה/בחינה במבני נתונים  2023 ב  מועד א.docx",
+              "locator": "ברירה 1"
+            }
+          },
+          {
+            "exam": "2023b-b",
+            "question": "ברירה 1",
+            "points": 7,
+            "source": {
+              "file": "מבחנים לדוגמה/פתרון בחינה במבני נתונים  2023 ב  מועד ב.docx",
+              "locator": "ברירה 1"
+            }
+          },
+          {
+            "exam": "2022b-a",
+            "question": "פתוחה 1",
+            "points": 26,
+            "source": {
+              "file": "מבחנים לדוגמה/בחינה במבני נתונים 2022 ב מועד א.docx",
+              "locator": "פתוחה 1"
+            }
+          },
+          {
+            "exam": "2019b-a",
+            "question": "ברירה 4",
+            "points": 6,
+            "source": {
+              "file": "מבחנים לדוגמה/בחינה במבני נתונים 2019 ב מועד א.docx",
+              "locator": "ברירה 4"
+            }
+          },
+          {
+            "exam": "2019b-b",
+            "question": "ברירה 4",
+            "points": 6,
+            "source": {
+              "file": "מבחנים לדוגמה/בחינה במבני נתונים 2019 ב מועד ב.docx",
+              "locator": "ברירה 4"
+            }
+          },
+          {
+            "exam": "2019s-a",
+            "question": "ברירה 1",
+            "points": 6,
+            "source": {
+              "file": "מבחנים לדוגמה/מבני נתונים 2019 קיץ מועד א.docx",
+              "locator": "ברירה 1"
+            }
+          },
+          {
+            "exam": "2019s-a",
+            "question": "ברירה 5",
+            "points": 6,
+            "source": {
+              "file": "מבחנים לדוגמה/מבני נתונים 2019 קיץ מועד א.docx",
+              "locator": "ברירה 5"
+            }
+          },
+          {
+            "exam": "2018b-a",
+            "question": "פתוחה 1",
+            "points": 20,
+            "source": {
+              "file": "מבחנים לדוגמה/בחינה במבני נתונים 2018 ב מועד א.docx",
+              "locator": "פתוחה 1"
+            }
+          },
+          {
+            "exam": "2018b-b",
+            "question": "פתוחה 1",
+            "points": 20,
+            "source": {
+              "file": "מבחנים לדוגמה/בחינה במבני נתונים 2018 ב מועד ב.docx",
+              "locator": "פתוחה 1"
+            }
+          },
+          {
+            "exam": "2018b-b",
+            "question": "ברירה 5",
+            "points": 6,
+            "source": {
+              "file": "מבחנים לדוגמה/בחינה במבני נתונים 2018 ב מועד ב.docx",
+              "locator": "ברירה 5"
+            }
+          },
+          {
+            "exam": "2018b-b",
+            "question": "ברירה 7",
+            "points": 6,
+            "source": {
+              "file": "מבחנים לדוגמה/בחינה במבני נתונים 2018 ב מועד ב.docx",
+              "locator": "ברירה 7"
+            }
+          },
+          {
+            "exam": "2018s-a",
+            "question": "פתוחה 2",
+            "points": 15,
+            "source": {
+              "file": "מבחנים לדוגמה/623411_full.pdf",
+              "locator": "PDF page 3; פתוחה 2"
+            }
+          },
+          {
+            "exam": "2018s-a",
+            "question": "ברירה 5",
+            "points": 6,
+            "source": {
+              "file": "מבחנים לדוגמה/623411_full.pdf",
+              "locator": "PDF page 5; ברירה 5"
+            }
+          },
+          {
+            "exam": "2018s-b",
+            "question": "ברירה 7",
+            "points": 6,
+            "source": {
+              "file": "מבחנים לדוגמה/סמסטר ג מועד ב - 2018.pdf",
+              "locator": "PDF page 6; ברירה 7"
+            }
+          },
+          {
+            "exam": "2018s-c",
+            "question": "ברירה 1",
+            "points": 6,
+            "source": {
+              "file": "מבחנים לדוגמה/תמר 1 עד 6.pdf",
+              "locator": "PDF page 3; ברירה 1"
+            }
+          },
+          {
+            "exam": "2018s-c",
+            "question": "ברירה 3",
+            "points": 6,
+            "source": {
+              "file": "מבחנים לדוגמה/תמר 1 עד 6.pdf",
+              "locator": "PDF page 3; ברירה 3"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "lin",
+      "name": "מיון בזמן לינארי וחסם תחתון",
+      "syllabus": {
+        "file": "Syllabus_HE.pdf",
+        "page": 3,
+        "entry": "מיון בזמן לינארי"
+      },
+      "lecture": {
+        "file": "הרצאות/PDF/מצגת 7 - מיון בזמן לינארי.pdf",
+        "pages": 20
+      },
+      "subtopics": [
+        "עץ החלטה וחסם Ω(n log n)",
+        "Counting Sort",
+        "Radix Sort",
+        "Bucket Sort",
+        "יציבות",
+        "מיון במקום של 0/1",
+        "רדוקציה לחסם התחתון"
+      ],
+      "subtopicVerification": "legacy candidate list crosschecked at heading level; not a claim that every named detail has been visually checked",
+      "practiceSourcesCandidate": "תרגול 11+12, דף עזר מיונים",
+      "priority": "A",
+      "priorityReason": "נושא מפורש בסילבוס; 19 מתוך 24 מבחני המדגם, 33 שאלות ראשיות, 251 נקודות ידועות. כלי חוזר לפתרון או ניתוח אלגוריתמים.",
+      "frequency": {
+        "topic": "lin",
+        "name": "מיון בזמן לינארי וחסם תחתון",
+        "questionCount": 33,
+        "examCount": 19,
+        "denominator": 24,
+        "knownPoints": 251,
+        "evidence": [
+          {
+            "exam": "2026b-b",
+            "question": "ברירה 7",
+            "points": 7,
+            "source": {
+              "file": "בחינה במבני נתונים 2026 ב מועד ב.docx",
+              "locator": "ברירה 7",
+              "xmlParagraph": 81
+            }
+          },
+          {
+            "exam": "2026b-a",
+            "question": "ברירה 1",
+            "points": 7,
+            "source": {
+              "file": "בחינה במבני נתונים 2026 ב מועד א.docx",
+              "locator": "ברירה 1",
+              "xmlParagraph": 23
+            }
+          },
+          {
+            "exam": "2026b-a",
+            "question": "ברירה 2",
+            "points": 7,
+            "source": {
+              "file": "בחינה במבני נתונים 2026 ב מועד א.docx",
+              "locator": "ברירה 2",
+              "xmlParagraph": 33
+            }
+          },
+          {
+            "exam": "2026a-b",
+            "question": "ברירה 3",
+            "points": 7,
+            "source": {
+              "file": "בחינה במבני נתונים 2026 א מועד ב.docx",
+              "locator": "ברירה 3",
+              "xmlParagraph": 42
+            }
+          },
+          {
+            "exam": "2026a-b",
+            "question": "ברירה 4",
+            "points": 7,
+            "source": {
+              "file": "בחינה במבני נתונים 2026 א מועד ב.docx",
+              "locator": "ברירה 4",
+              "xmlParagraph": 52
+            }
+          },
+          {
+            "exam": "2025a-a",
+            "question": "ברירה 1",
+            "points": 7,
+            "source": {
+              "file": "מבחנים לדוגמה/בחינה במבני נתונים 2025 א  מועד א.docx",
+              "locator": "ברירה 1"
+            }
+          },
+          {
+            "exam": "2025a-a",
+            "question": "ברירה 2",
+            "points": 7,
+            "source": {
+              "file": "מבחנים לדוגמה/בחינה במבני נתונים 2025 א  מועד א.docx",
+              "locator": "ברירה 2"
+            }
+          },
+          {
+            "exam": "2025a-b",
+            "question": "ברירה 4",
+            "points": 7,
+            "source": {
+              "file": "מבחנים לדוגמה/בחינה במבני נתונים 2025 א  מועד ב.docx",
+              "locator": "ברירה 4"
+            }
+          },
+          {
+            "exam": "2025a-b",
+            "question": "ברירה 6",
+            "points": 7,
+            "source": {
+              "file": "מבחנים לדוגמה/בחינה במבני נתונים 2025 א  מועד ב.docx",
+              "locator": "ברירה 6"
+            }
+          },
+          {
+            "exam": "2024s-a",
+            "question": "ברירה 2",
+            "points": 7,
+            "source": {
+              "file": "מבחנים לדוגמה/בחינה במבני נתונים 2024 קיץ  מועד א.docx",
+              "locator": "ברירה 2"
+            }
+          },
+          {
+            "exam": "2024s-a",
+            "question": "ברירה 5",
+            "points": 7,
+            "source": {
+              "file": "מבחנים לדוגמה/בחינה במבני נתונים 2024 קיץ  מועד א.docx",
+              "locator": "ברירה 5"
+            }
+          },
+          {
+            "exam": "2024s-b",
+            "question": "ברירה 3",
+            "points": 7,
+            "source": {
+              "file": "מבחנים לדוגמה/בחינה במבני נתונים 2024 קיץ  מועד ב.docx",
+              "locator": "ברירה 3"
+            }
+          },
+          {
+            "exam": "2024s-b",
+            "question": "ברירה 5",
+            "points": 7,
+            "source": {
+              "file": "מבחנים לדוגמה/בחינה במבני נתונים 2024 קיץ  מועד ב.docx",
+              "locator": "ברירה 5"
+            }
+          },
+          {
+            "exam": "2024b-a",
+            "question": "ברירה 3",
+            "points": 7,
+            "source": {
+              "file": "מבחנים לדוגמה/בחינה במבני נתונים 2024 ב  מועד א.docx",
+              "locator": "ברירה 3"
+            }
+          },
+          {
+            "exam": "2024b-a",
+            "question": "פתוחה 1",
+            "points": 26,
+            "source": {
+              "file": "מבחנים לדוגמה/בחינה במבני נתונים 2024 ב  מועד א.docx",
+              "locator": "פתוחה 1"
+            }
+          },
+          {
+            "exam": "2024b-b",
+            "question": "ברירה 3",
+            "points": 7,
+            "source": {
+              "file": "מבחנים לדוגמה/מבחן מבני נתונים 2024ב מועד ב - מקודד.docx",
+              "locator": "ברירה 3"
+            }
+          },
+          {
+            "exam": "2023b-a",
+            "question": "ברירה 3",
+            "points": 7,
+            "source": {
+              "file": "מבחנים לדוגמה/בחינה במבני נתונים  2023 ב  מועד א.docx",
+              "locator": "ברירה 3"
+            }
+          },
+          {
+            "exam": "2023b-b",
+            "question": "ברירה 3",
+            "points": 7,
+            "source": {
+              "file": "מבחנים לדוגמה/פתרון בחינה במבני נתונים  2023 ב  מועד ב.docx",
+              "locator": "ברירה 3"
+            }
+          },
+          {
+            "exam": "2023b-b",
+            "question": "ברירה 4",
+            "points": 7,
+            "source": {
+              "file": "מבחנים לדוגמה/פתרון בחינה במבני נתונים  2023 ב  מועד ב.docx",
+              "locator": "ברירה 4"
+            }
+          },
+          {
+            "exam": "2023b-b",
+            "question": "ברירה 6",
+            "points": 7,
+            "source": {
+              "file": "מבחנים לדוגמה/פתרון בחינה במבני נתונים  2023 ב  מועד ב.docx",
+              "locator": "ברירה 6"
+            }
+          },
+          {
+            "exam": "2022b-a",
+            "question": "ברירה 3",
+            "points": 6,
+            "source": {
+              "file": "מבחנים לדוגמה/בחינה במבני נתונים 2022 ב מועד א.docx",
+              "locator": "ברירה 3"
+            }
+          },
+          {
+            "exam": "2022s-a",
+            "question": "ברירה 2",
+            "points": 6,
+            "source": {
+              "file": "מבחנים לדוגמה/בחינה במבני נתונים  2022 קיץ  מועד א.docx",
+              "locator": "ברירה 2"
+            }
+          },
+          {
+            "exam": "2019b-a",
+            "question": "ברירה 9",
+            "points": 6,
+            "source": {
+              "file": "מבחנים לדוגמה/בחינה במבני נתונים 2019 ב מועד א.docx",
+              "locator": "ברירה 9"
+            }
+          },
+          {
+            "exam": "2019b-b",
+            "question": "ברירה 2",
+            "points": 6,
+            "source": {
+              "file": "מבחנים לדוגמה/בחינה במבני נתונים 2019 ב מועד ב.docx",
+              "locator": "ברירה 2"
+            }
+          },
+          {
+            "exam": "2019b-b",
+            "question": "ברירה 9",
+            "points": 6,
+            "source": {
+              "file": "מבחנים לדוגמה/בחינה במבני נתונים 2019 ב מועד ב.docx",
+              "locator": "ברירה 9"
+            }
+          },
+          {
+            "exam": "2019s-a",
+            "question": "ברירה 2",
+            "points": 6,
+            "source": {
+              "file": "מבחנים לדוגמה/מבני נתונים 2019 קיץ מועד א.docx",
+              "locator": "ברירה 2"
+            }
+          },
+          {
+            "exam": "2019s-b",
+            "question": "ברירה 6",
+            "points": 6,
+            "source": {
+              "file": "מבחנים לדוגמה/מבני נתונים 2019 קיץ מועד ב.docx",
+              "locator": "ברירה 6"
+            }
+          },
+          {
+            "exam": "2019s-b",
+            "question": "ברירה 10",
+            "points": 6,
+            "source": {
+              "file": "מבחנים לדוגמה/מבני נתונים 2019 קיץ מועד ב.docx",
+              "locator": "ברירה 10"
+            }
+          },
+          {
+            "exam": "2018b-a",
+            "question": "פתוחה 2",
+            "points": 20,
+            "source": {
+              "file": "מבחנים לדוגמה/בחינה במבני נתונים 2018 ב מועד א.docx",
+              "locator": "פתוחה 2"
+            }
+          },
+          {
+            "exam": "2018b-a",
+            "question": "ברירה 5",
+            "points": 6,
+            "source": {
+              "file": "מבחנים לדוגמה/בחינה במבני נתונים 2018 ב מועד א.docx",
+              "locator": "ברירה 5"
+            }
+          },
+          {
+            "exam": "2018s-a",
+            "question": "ברירה 7",
+            "points": 6,
+            "source": {
+              "file": "מבחנים לדוגמה/623411_full.pdf",
+              "locator": "PDF page 5; ברירה 7"
+            }
+          },
+          {
+            "exam": "2018s-a",
+            "question": "ברירה 8",
+            "points": 6,
+            "source": {
+              "file": "מבחנים לדוגמה/623411_full.pdf",
+              "locator": "PDF page 6; ברירה 8"
+            }
+          },
+          {
+            "exam": "2018s-a",
+            "question": "ברירה 10",
+            "points": 6,
+            "source": {
+              "file": "מבחנים לדוגמה/623411_full.pdf",
+              "locator": "PDF page 6; ברירה 10"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "hash",
+      "name": "טבלאות גיבוב",
+      "syllabus": {
+        "file": "Syllabus_HE.pdf",
+        "page": 3,
+        "entry": "טבלת גיבוב"
+      },
+      "lecture": {
+        "file": "הרצאות/PDF/מצגת 8 - טבלאות גיבוב.pdf",
+        "pages": 24
+      },
+      "subtopics": [
+        "מיעון ישיר",
+        "פונקציית גיבוב",
+        "שרשור ומקדם עומס α",
+        "מיעון פתוח: לינארי, ריבועי, גיבוב כפול",
+        "תנאי הגיבוב האחיד",
+        "גיבוב + AVL"
+      ],
+      "subtopicVerification": "legacy candidate list crosschecked at heading level; not a claim that every named detail has been visually checked",
+      "practiceSourcesCandidate": "תרגול 11+12 ×2",
+      "priority": "B",
+      "priorityReason": "נושא מפורש בסילבוס; 17 מתוך 24 מבחני המדגם, 22 שאלות ראשיות, 178 נקודות ידועות. בסיס לנושאים המתקדמים; אין לדלג גם אם ההשקעה הייעודית קצרה יותר.",
+      "frequency": {
+        "topic": "hash",
+        "name": "טבלאות גיבוב",
+        "questionCount": 22,
+        "examCount": 17,
+        "denominator": 24,
+        "knownPoints": 178,
+        "evidence": [
+          {
+            "exam": "2026b-b",
+            "question": "ברירה 1",
+            "points": 7,
+            "source": {
+              "file": "בחינה במבני נתונים 2026 ב מועד ב.docx",
+              "locator": "ברירה 1",
+              "xmlParagraph": 24
+            }
+          },
+          {
+            "exam": "2026b-a",
+            "question": "ברירה 5",
+            "points": 7,
+            "source": {
+              "file": "בחינה במבני נתונים 2026 ב מועד א.docx",
+              "locator": "ברירה 5",
+              "xmlParagraph": 58
+            }
+          },
+          {
+            "exam": "2026a-b",
+            "question": "פתוחה 1",
+            "points": 26,
+            "source": {
+              "file": "בחינה במבני נתונים 2026 א מועד ב.docx",
+              "locator": "פתוחה 1",
+              "xmlParagraph": 7
+            }
+          },
+          {
+            "exam": "2026a-b",
+            "question": "ברירה 5",
+            "points": 7,
+            "source": {
+              "file": "בחינה במבני נתונים 2026 א מועד ב.docx",
+              "locator": "ברירה 5",
+              "xmlParagraph": 62
+            }
+          },
+          {
+            "exam": "2026a-a",
+            "question": "ברירה 5",
+            "points": 7,
+            "source": {
+              "file": "בחינה במבני נתונים 2026 א מועד א.docx",
+              "locator": "ברירה 5",
+              "xmlParagraph": 122
+            }
+          },
+          {
+            "exam": "2023b-a",
+            "question": "ברירה 5",
+            "points": 7,
+            "source": {
+              "file": "מבחנים לדוגמה/בחינה במבני נתונים  2023 ב  מועד א.docx",
+              "locator": "ברירה 5"
+            }
+          },
+          {
+            "exam": "2023b-b",
+            "question": "ברירה 2",
+            "points": 7,
+            "source": {
+              "file": "מבחנים לדוגמה/פתרון בחינה במבני נתונים  2023 ב  מועד ב.docx",
+              "locator": "ברירה 2"
+            }
+          },
+          {
+            "exam": "2022b-a",
+            "question": "ברירה 2",
+            "points": 6,
+            "source": {
+              "file": "מבחנים לדוגמה/בחינה במבני נתונים 2022 ב מועד א.docx",
+              "locator": "ברירה 2"
+            }
+          },
+          {
+            "exam": "2022s-a",
+            "question": "פתוחה 2",
+            "points": 26,
+            "source": {
+              "file": "מבחנים לדוגמה/בחינה במבני נתונים  2022 קיץ  מועד א.docx",
+              "locator": "פתוחה 2"
+            }
+          },
+          {
+            "exam": "2022s-a",
+            "question": "ברירה 3",
+            "points": 6,
+            "source": {
+              "file": "מבחנים לדוגמה/בחינה במבני נתונים  2022 קיץ  מועד א.docx",
+              "locator": "ברירה 3"
+            }
+          },
+          {
+            "exam": "2022s-b",
+            "question": "ברירה 8",
+            "points": 6,
+            "source": {
+              "file": "מבחנים לדוגמה/בחינה במבני נתונים  2022 קיץ  מועד ב.docx",
+              "locator": "ברירה 8"
+            }
+          },
+          {
+            "exam": "2019b-a",
+            "question": "ברירה 8",
+            "points": 6,
+            "source": {
+              "file": "מבחנים לדוגמה/בחינה במבני נתונים 2019 ב מועד א.docx",
+              "locator": "ברירה 8"
+            }
+          },
+          {
+            "exam": "2019b-b",
+            "question": "ברירה 5",
+            "points": 6,
+            "source": {
+              "file": "מבחנים לדוגמה/בחינה במבני נתונים 2019 ב מועד ב.docx",
+              "locator": "ברירה 5"
+            }
+          },
+          {
+            "exam": "2019b-b",
+            "question": "ברירה 10",
+            "points": 6,
+            "source": {
+              "file": "מבחנים לדוגמה/בחינה במבני נתונים 2019 ב מועד ב.docx",
+              "locator": "ברירה 10"
+            }
+          },
+          {
+            "exam": "2019s-a",
+            "question": "ברירה 4",
+            "points": 6,
+            "source": {
+              "file": "מבחנים לדוגמה/מבני נתונים 2019 קיץ מועד א.docx",
+              "locator": "ברירה 4"
+            }
+          },
+          {
+            "exam": "2019s-a",
+            "question": "ברירה 10",
+            "points": 6,
+            "source": {
+              "file": "מבחנים לדוגמה/מבני נתונים 2019 קיץ מועד א.docx",
+              "locator": "ברירה 10"
+            }
+          },
+          {
+            "exam": "2019s-b",
+            "question": "ברירה 4",
+            "points": 6,
+            "source": {
+              "file": "מבחנים לדוגמה/מבני נתונים 2019 קיץ מועד ב.docx",
+              "locator": "ברירה 4"
+            }
+          },
+          {
+            "exam": "2019s-b",
+            "question": "ברירה 7",
+            "points": 6,
+            "source": {
+              "file": "מבחנים לדוגמה/מבני נתונים 2019 קיץ מועד ב.docx",
+              "locator": "ברירה 7"
+            }
+          },
+          {
+            "exam": "2018b-a",
+            "question": "ברירה 2",
+            "points": 6,
+            "source": {
+              "file": "מבחנים לדוגמה/בחינה במבני נתונים 2018 ב מועד א.docx",
+              "locator": "ברירה 2"
+            }
+          },
+          {
+            "exam": "2018b-b",
+            "question": "ברירה 6",
+            "points": 6,
+            "source": {
+              "file": "מבחנים לדוגמה/בחינה במבני נתונים 2018 ב מועד ב.docx",
+              "locator": "ברירה 6"
+            }
+          },
+          {
+            "exam": "2018s-a",
+            "question": "ברירה 4",
+            "points": 6,
+            "source": {
+              "file": "מבחנים לדוגמה/623411_full.pdf",
+              "locator": "PDF page 4; ברירה 4"
+            }
+          },
+          {
+            "exam": "2018s-b",
+            "question": "ברירה 4",
+            "points": 6,
+            "source": {
+              "file": "מבחנים לדוגמה/סמסטר ג מועד ב - 2018.pdf",
+              "locator": "PDF page 4; ברירה 4"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "aug",
+      "name": "הרחבה ושילוב מבני נתונים",
+      "syllabus": {
+        "file": "Syllabus_HE.pdf",
+        "page": 3,
+        "entry": "הרחבה של מבנה נתונים"
+      },
+      "lecture": {
+        "file": "הרצאות/PDF/מצגת 9 - הרחבה של מבני נתונים.pdf",
+        "pages": 13
+      },
+      "subtopics": [
+        "מחסנית עם Min ב-O(1)",
+        "size ו-Select/Rank",
+        "sum ו-Less/ממוצע",
+        "leaves",
+        "Between",
+        "Pair-Diff",
+        "מצביעים הדדיים",
+        "שילוב שני מבנים",
+        "אוגר גלובלי"
+      ],
+      "subtopicVerification": "legacy candidate list crosschecked at heading level; not a claim that every named detail has been visually checked",
+      "practiceSourcesCandidate": "שיעור חזרה 2021, מרתון 2025",
+      "priority": "A",
+      "priorityReason": "נושא מפורש בסילבוס; 23 מתוך 24 מבחני המדגם, 26 שאלות ראשיות, 504 נקודות ידועות. משקל גבוה בשאלות תכנון ושילוב.",
+      "frequency": {
+        "topic": "aug",
+        "name": "הרחבה ושילוב מבני נתונים",
+        "questionCount": 26,
+        "examCount": 23,
+        "denominator": 24,
+        "knownPoints": 504,
+        "evidence": [
+          {
+            "exam": "2026b-b",
+            "question": "פתוחה 2",
+            "points": 25,
+            "source": {
+              "file": "בחינה במבני נתונים 2026 ב מועד ב.docx",
+              "locator": "פתוחה 2",
+              "xmlParagraph": 10
+            }
+          },
+          {
+            "exam": "2026b-a",
+            "question": "פתוחה 2",
+            "points": 25,
+            "source": {
+              "file": "בחינה במבני נתונים 2026 ב מועד א.docx",
+              "locator": "פתוחה 2",
+              "xmlParagraph": 10
+            }
+          },
+          {
+            "exam": "2026a-b",
+            "question": "פתוחה 2",
+            "points": 25,
+            "source": {
+              "file": "בחינה במבני נתונים 2026 א מועד ב.docx",
+              "locator": "פתוחה 2",
+              "xmlParagraph": 15
+            }
+          },
+          {
+            "exam": "2026a-a",
+            "question": "פתוחה 2",
+            "points": 25,
+            "source": {
+              "file": "בחינה במבני נתונים 2026 א מועד א.docx",
+              "locator": "פתוחה 2",
+              "xmlParagraph": 17
+            }
+          },
+          {
+            "exam": "2025a-a",
+            "question": "פתוחה 2",
+            "points": 25,
+            "source": {
+              "file": "מבחנים לדוגמה/בחינה במבני נתונים 2025 א  מועד א.docx",
+              "locator": "פתוחה 2"
+            }
+          },
+          {
+            "exam": "2025a-b",
+            "question": "פתוחה 2",
+            "points": 25,
+            "source": {
+              "file": "מבחנים לדוגמה/בחינה במבני נתונים 2025 א  מועד ב.docx",
+              "locator": "פתוחה 2"
+            }
+          },
+          {
+            "exam": "2024s-a",
+            "question": "פתוחה 2",
+            "points": 25,
+            "source": {
+              "file": "מבחנים לדוגמה/בחינה במבני נתונים 2024 קיץ  מועד א.docx",
+              "locator": "פתוחה 2"
+            }
+          },
+          {
+            "exam": "2024s-b",
+            "question": "פתוחה 2",
+            "points": 25,
+            "source": {
+              "file": "מבחנים לדוגמה/בחינה במבני נתונים 2024 קיץ  מועד ב.docx",
+              "locator": "פתוחה 2"
+            }
+          },
+          {
+            "exam": "2024b-a",
+            "question": "ברירה 2",
+            "points": 7,
+            "source": {
+              "file": "מבחנים לדוגמה/בחינה במבני נתונים 2024 ב  מועד א.docx",
+              "locator": "ברירה 2"
+            }
+          },
+          {
+            "exam": "2024b-a",
+            "question": "פתוחה 2",
+            "points": 25,
+            "source": {
+              "file": "מבחנים לדוגמה/בחינה במבני נתונים 2024 ב  מועד א.docx",
+              "locator": "פתוחה 2"
+            }
+          },
+          {
+            "exam": "2024b-b",
+            "question": "פתוחה 2",
+            "points": 25,
+            "source": {
+              "file": "מבחנים לדוגמה/מבחן מבני נתונים 2024ב מועד ב - מקודד.docx",
+              "locator": "פתוחה 2"
+            }
+          },
+          {
+            "exam": "2023b-a",
+            "question": "פתוחה 2",
+            "points": 25,
+            "source": {
+              "file": "מבחנים לדוגמה/בחינה במבני נתונים  2023 ב  מועד א.docx",
+              "locator": "פתוחה 2"
+            }
+          },
+          {
+            "exam": "2023b-b",
+            "question": "פתוחה 2",
+            "points": 25,
+            "source": {
+              "file": "מבחנים לדוגמה/פתרון בחינה במבני נתונים  2023 ב  מועד ב.docx",
+              "locator": "פתוחה 2"
+            }
+          },
+          {
+            "exam": "2022b-a",
+            "question": "פתוחה 2",
+            "points": 26,
+            "source": {
+              "file": "מבחנים לדוגמה/בחינה במבני נתונים 2022 ב מועד א.docx",
+              "locator": "פתוחה 2"
+            }
+          },
+          {
+            "exam": "2022s-a",
+            "question": "ברירה 5",
+            "points": 6,
+            "source": {
+              "file": "מבחנים לדוגמה/בחינה במבני נתונים  2022 קיץ  מועד א.docx",
+              "locator": "ברירה 5"
+            }
+          },
+          {
+            "exam": "2022s-b",
+            "question": "פתוחה 2",
+            "points": 26,
+            "source": {
+              "file": "מבחנים לדוגמה/בחינה במבני נתונים  2022 קיץ  מועד ב.docx",
+              "locator": "פתוחה 2"
+            }
+          },
+          {
+            "exam": "2019b-a",
+            "question": "פתוחה 2",
+            "points": 20,
+            "source": {
+              "file": "מבחנים לדוגמה/בחינה במבני נתונים 2019 ב מועד א.docx",
+              "locator": "פתוחה 2"
+            }
+          },
+          {
+            "exam": "2019b-a",
+            "question": "ברירה 10",
+            "points": 6,
+            "source": {
+              "file": "מבחנים לדוגמה/בחינה במבני נתונים 2019 ב מועד א.docx",
+              "locator": "ברירה 10"
+            }
+          },
+          {
+            "exam": "2019b-b",
+            "question": "ברירה 8",
+            "points": 6,
+            "source": {
+              "file": "מבחנים לדוגמה/בחינה במבני נתונים 2019 ב מועד ב.docx",
+              "locator": "ברירה 8"
+            }
+          },
+          {
+            "exam": "2019s-a",
+            "question": "פתוחה 2",
+            "points": 20,
+            "source": {
+              "file": "מבחנים לדוגמה/מבני נתונים 2019 קיץ מועד א.docx",
+              "locator": "פתוחה 2"
+            }
+          },
+          {
+            "exam": "2019s-a",
+            "question": "ברירה 7",
+            "points": 6,
+            "source": {
+              "file": "מבחנים לדוגמה/מבני נתונים 2019 קיץ מועד א.docx",
+              "locator": "ברירה 7"
+            }
+          },
+          {
+            "exam": "2019s-b",
+            "question": "פתוחה 2",
+            "points": 20,
+            "source": {
+              "file": "מבחנים לדוגמה/מבני נתונים 2019 קיץ מועד ב.docx",
+              "locator": "פתוחה 2"
+            }
+          },
+          {
+            "exam": "2018b-a",
+            "question": "ברירה 10",
+            "points": 6,
+            "source": {
+              "file": "מבחנים לדוגמה/בחינה במבני נתונים 2018 ב מועד א.docx",
+              "locator": "ברירה 10"
+            }
+          },
+          {
+            "exam": "2018b-b",
+            "question": "פתוחה 2",
+            "points": 20,
+            "source": {
+              "file": "מבחנים לדוגמה/בחינה במבני נתונים 2018 ב מועד ב.docx",
+              "locator": "פתוחה 2"
+            }
+          },
+          {
+            "exam": "2018s-b",
+            "question": "פתוחה 1",
+            "points": 15,
+            "source": {
+              "file": "מבחנים לדוגמה/סמסטר ג מועד ב - 2018.pdf",
+              "locator": "PDF page 2; פתוחה 1"
+            }
+          },
+          {
+            "exam": "2018s-c",
+            "question": "פתוחה 1",
+            "points": 20,
+            "source": {
+              "file": "מבחנים לדוגמה/תמר 1 עד 6.pdf",
+              "locator": "PDF page 2; פתוחה 1"
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "notInSyllabus": [
+    "גרפים כלליים",
+    "Union-Find",
+    "עצים אדומים־שחורים",
+    "עצי B",
+    "Skip Lists"
+  ],
+  "scopeCaution": "Absence from the syllabus is not proof of absence from every older exam. Historical papers may define new concepts locally.",
+  "secondaryPriorities": [
+    {
+      "topic": "Karatsuba / כפל מספרים ארוכים",
+      "priority": "B",
+      "evidence": "2019b-a פתוחה 1, 20 נקודות; מצגת 2",
+      "reason": "הופעה פתוחה מתועדת — אין בסיס לטענת אפס הופעות."
+    },
+    {
+      "topic": "הרצת מניות / תת־מערך מקסימלי",
+      "priority": "B",
+      "evidence": "2024s-a פתוחה 1, 26 נקודות; 2019s-b ברירה 9; 2018s-b פתוחה 2ב",
+      "reason": "יש ללמוד את דפוס ההחזרה של מידע מהרקורסיה."
+    },
+    {
+      "topic": "Treap",
+      "priority": "D",
+      "evidence": "מצגת 6: אזכור משלים; לא מזוהה בשאלות המדגם הראשי",
+      "reason": "העשרה לאחר שליטה במבנים המרכזיים; אפס במדגם אינו טענת אפס בכל הארכיון."
+    }
+  ]
+}

@@ -128,7 +128,7 @@ export function SummaryExportModal({ close }) {
                 className="pill priority-a"
                 style={{ fontSize: '0.8rem', padding: '4px 10px' }}
               >
-                CourseForge Master Edition
+                Course_Master
               </span>
             </div>
           </div>
@@ -377,7 +377,7 @@ export function SummaryExportModal({ close }) {
               color: 'var(--text-muted)'
             }}
           >
-            נוצר אוטומטית ע"י CourseForge Master Platform · בהצלחה במבחן!
+            נוצר אוטומטית ע"י Course_Master · בהצלחה במבחן!
           </div>
         </div>
       </div>

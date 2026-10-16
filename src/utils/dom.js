@@ -4,8 +4,7 @@ import { renderMathInHtml } from './math';
 export const currentRoute = () => {
   const raw = window.location.hash.slice(2).split('?')[0];
   if (!raw) {
-    const hasSelected = localStorage.getItem('courseforge_has_selected');
-    return hasSelected ? 'home' : 'courses';
+    return 'home';
   }
   return decodeURIComponent(raw);
 };

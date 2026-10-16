@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 192" fill="none">
+  <defs>
+    <linearGradient id="cmBg" x1="0" y1="0" x2="192" y2="192" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#18181b"/>
+      <stop offset="50%" stop-color="#312e81"/>
+      <stop offset="100%" stop-color="#4338ca"/>
+    </linearGradient>
+    <linearGradient id="cmCrown" x1="36" y1="44" x2="156" y2="136" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="100%" stop-color="#c7d2fe"/>
+    </linearGradient>
+  </defs>
+  <rect width="192" height="192" rx="44" fill="url(#cmBg)"/>
+  <!-- Academic Mastery Crown / 'M' Monogram -->
+  <path
+    d="M42 126V64L74 96L96 54L118 96L150 64V126"
+    stroke="url(#cmCrown)"
+    stroke-width="16"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  />
+  <!-- Peak Mastery Node -->
+  <circle cx="96" cy="40" r="8" fill="#818cf8"/>
+  <!-- Underscore '_' Bar representing Course_Master -->
+  <rect x="52" y="146" width="88" height="14" rx="7" fill="#818cf8"/>
+</svg>

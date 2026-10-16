@@ -5,24 +5,21 @@ import {
   BookOpen,
   HelpCircle,
   Timer,
-  Sparkles,
   FlaskConical,
   Award,
   Layers,
-  Flame,
   CheckCircle2,
   AlertTriangle,
   Calendar,
-  Clock,
-  Printer
+  Wand2
 } from 'lucide-react';
 import { useCourse } from '../context/CourseStore';
 import { useUser } from '../context/UserContext';
-import { PageHead, ProgressBar, Pill } from '../components/common/PageHead';
+import { ProgressBar, Pill } from '../components/common/PageHead';
 import { navigate, getProgressValue } from '../utils/dom';
 
-export function HomePage({ store, openExportPdf }) {
-  const { activeCourse, courses } = useCourse();
+export function HomePage({ store }) {
+  const { activeCourse } = useCourse();
   const { currentUser } = useUser();
   const courseData = activeCourse?.courseData || {};
   const courseInfo = courseData.COURSE || {};
@@ -42,7 +39,7 @@ export function HomePage({ store, openExportPdf }) {
   ).length;
 
   const errorsCount = Object.keys(store.progress.entries || {}).filter(
-    k => k.startsWith('error:')
+    k => k.startsWith('error:') && store.progress.entries[k]?.value
   ).length;
 
   const cardsKnown = Object.keys(store.progress.entries || {}).filter(
@@ -61,410 +58,291 @@ export function HomePage({ store, openExportPdf }) {
     : 21;
 
   return (
-    <div style={{ maxWidth: 1040, margin: '0 auto', paddingBottom: 60 }}>
-      {/* Clean Minimalist Header */}
+    <div style={{ paddingBottom: 40 }}>
+      {/* Clean Academic Title Bar */}
       <div
         style={{
           display: 'flex',
           justifyContent: 'space-between',
-          alignItems: 'flex-start',
+          alignItems: 'flex-end',
           flexWrap: 'wrap',
           gap: 16,
-          marginBottom: 28,
+          marginBottom: 24,
           paddingBottom: 20,
           borderBottom: '1px solid var(--border-subtle)'
         }}
       >
         <div>
           <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 6 }}>
-            <span style={{ fontSize: '0.85rem', fontWeight: 600, color: 'var(--primary)' }}>
-              {courseInfo.code ? `קורס ${courseInfo.code} · ${courseInfo.inst || ''}` : 'מרכז הלמידה האקדמי'}
+            <span style={{ fontSize: '0.8rem', fontWeight: 650, color: 'var(--primary)' }}>
+              {courseInfo.code ? `${courseInfo.code} · ${courseInfo.inst || ''}` : 'סביבת למידה אקדמית'}
             </span>
             <span style={{ color: 'var(--text-dim)' }}>•</span>
-            <span style={{ fontSize: '0.82rem', color: 'var(--text-muted)' }}>
-              שלום {currentUser?.name?.split(' ')[0] || 'סטודנט'} 👋
+            <span style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>
+              שלום {currentUser?.name?.split(' ')[0] || 'סטודנט'}
             </span>
           </div>
 
-          <h1 style={{ margin: 0, fontSize: '1.9rem', fontWeight: 800, letterSpacing: '-0.02em' }}>
+          <h1 style={{ margin: 0, fontSize: '1.75rem', fontWeight: 800, letterSpacing: '-0.02em' }}>
             {courseInfo.name || 'מבני נתונים ואלגוריתמים'}
           </h1>
         </div>
 
-        {/* Header Right Status Pill */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
           <button
             className="ghost-button"
             onClick={() => navigate('calendar')}
-            style={{
-              display: 'inline-flex',
-              alignItems: 'center',
-              gap: 6,
-              padding: '6px 14px',
-              borderRadius: 999,
-              background: 'var(--bg-surface)',
-              border: '1px solid var(--border-subtle)',
-              fontSize: '0.85rem'
-            }}
+            style={{ fontSize: '0.82rem', padding: '6px 12px' }}
           >
-            <Calendar size={15} color="var(--primary)" />
+            <Calendar size={14} color="var(--primary)" />
             <span>{daysUntilExam} ימים לבחינה</span>
           </button>
 
-          <div
-            style={{
-              display: 'inline-flex',
-              alignItems: 'center',
-              gap: 6,
-              padding: '6px 14px',
-              borderRadius: 999,
-              background: 'var(--primary-subtle)',
-              color: 'var(--primary)',
-              fontSize: '0.85rem',
-              fontWeight: 700
-            }}
-          >
-            <Award size={15} />
+          <span className="pill priority-a" style={{ padding: '6px 12px', fontSize: '0.8rem' }}>
+            <Award size={14} />
             <span>יעד: {currentUser?.targetGrade || 90}</span>
-          </div>
+          </span>
         </div>
       </div>
 
-      {/* Main Focus Banner (Zen Card) */}
+      {/* Primary Action Card: Continue Where You Left Off */}
       <section
+        className="surface"
         style={{
-          background: 'linear-gradient(135deg, var(--bg-surface) 0%, var(--bg-card-subtle) 100%)',
-          border: '1px solid var(--border-subtle)',
-          borderRadius: 'var(--radius-xl, 20px)',
-          padding: '28px 32px',
-          marginBottom: 28,
           display: 'flex',
           justifyContent: 'space-between',
           alignItems: 'center',
           flexWrap: 'wrap',
-          gap: 20
+          gap: 20,
+          padding: '24px 28px',
+          marginBottom: 24
         }}
       >
-        <div style={{ maxWidth: '65ch' }}>
+        <div style={{ maxWidth: '62ch' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 8 }}>
-            <span
-              style={{
-                fontSize: '0.75rem',
-                fontWeight: 700,
-                textTransform: 'uppercase',
-                letterSpacing: '0.06em',
-                color: 'var(--primary)',
-                background: 'var(--primary-subtle)',
-                padding: '3px 8px',
-                borderRadius: 6
-              }}
-            >
-              המשך מאיפה שהפסקת
-            </span>
-            <span style={{ fontSize: '0.82rem', color: 'var(--text-muted)' }}>
-              שליטה כוללת בקורס: {completionPercent}%
+            <Pill tone="priority-a">המשך למידה</Pill>
+            <span style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>
+              פרק {currentTopic.n || 1} מתוך {TOPICS.length} · {completionPercent}% שליטה בקורס
             </span>
           </div>
 
-          <h2 style={{ margin: '0 0 8px 0', fontSize: '1.45rem', fontWeight: 800 }}>
+          <h2 style={{ margin: '0 0 6px 0', fontSize: '1.35rem', fontWeight: 750 }}>
             {currentTopic.title}
           </h2>
-          <p style={{ margin: 0, color: 'var(--text-secondary)', fontSize: '0.92rem', lineHeight: 1.5 }}>
-            {currentTopic.why || 'פתח את הפרק כדי לצפות בסיכום המקיף, דוגמאות הקוד וסיבוכיות הפעולות.'}
+          <p style={{ margin: 0, color: 'var(--text-secondary)', fontSize: '0.9rem', lineHeight: 1.55 }}>
+            {currentTopic.why || 'קרא את סיכום הפרק, בדוק את טבלאות הסיבוכיות ותרגל שאלות ממבחנים.'}
           </p>
         </div>
 
-        {currentTopic.id && (
+        <div style={{ display: 'flex', gap: 10 }}>
+          {currentTopic.id && (
+            <button
+              className="primary"
+              onClick={() => navigate(`chapter/${currentTopic.id}`)}
+              style={{ padding: '10px 20px' }}
+            >
+              <span>פתח פרק</span>
+              <ArrowLeft size={15} />
+            </button>
+          )}
           <button
-            className="primary"
-            onClick={() => navigate(`chapter/${currentTopic.id}`)}
-            style={{
-              display: 'inline-flex',
-              alignItems: 'center',
-              gap: 8,
-              padding: '12px 24px',
-              fontSize: '0.95rem',
-              borderRadius: 'var(--radius-md)'
-            }}
+            className="ghost-button"
+            onClick={() => navigate(`practice?topic=${currentTopic.id}`)}
           >
-            <span>המשך לפרק</span>
-            <ArrowLeft size={16} />
+            <span>תרגול שאלות</span>
           </button>
-        )}
+        </div>
       </section>
 
-      {/* 4 Minimalist Metric Tiles */}
-      <section
+      {/* 4 Crisp Metric Cards */}
+      <div className="snapshot-grid" style={{ marginBottom: 28 }}>
+        <div
+          className="stat-card"
+          onClick={() => navigate('chapters')}
+          style={{ cursor: 'pointer' }}
+        >
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+            <small>פרקים שנלמדו</small>
+            <BookOpen size={15} color="var(--text-muted)" />
+          </div>
+          <strong dir="ltr">{masteredTopics} / {TOPICS.length}</strong>
+          <ProgressBar done={masteredTopics} total={TOPICS.length} />
+        </div>
+
+        <div
+          className="stat-card"
+          onClick={() => navigate('practice')}
+          style={{ cursor: 'pointer' }}
+        >
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+            <small>שאלות שנפתרו</small>
+            <HelpCircle size={15} color="var(--text-muted)" />
+          </div>
+          <strong dir="ltr">{attemptedQuestions} / {QUESTIONS.length}</strong>
+          <ProgressBar done={attemptedQuestions} total={QUESTIONS.length} />
+        </div>
+
+        <div
+          className="stat-card"
+          onClick={() => navigate('cards')}
+          style={{ cursor: 'pointer' }}
+        >
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+            <small>כרטיסיות בשליטה</small>
+            <Layers size={15} color="var(--text-muted)" />
+          </div>
+          <strong dir="ltr">{cardsKnown} / {CARDS.length}</strong>
+          <ProgressBar done={cardsKnown} total={CARDS.length} />
+        </div>
+
+        <div
+          className="stat-card"
+          onClick={() => navigate('errors')}
+          style={{ cursor: 'pointer' }}
+        >
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+            <small>טעויות לחיזוק</small>
+            <AlertTriangle size={15} color={errorsCount > 0 ? 'var(--danger)' : 'var(--text-muted)'} />
+          </div>
+          <strong style={{ color: errorsCount > 0 ? 'var(--danger)' : 'var(--text-primary)' }}>
+            {errorsCount}
+          </strong>
+          <span>{errorsCount > 0 ? 'מומלץ לתרגל שוב' : 'אין טעויות פתוחות'}</span>
+        </div>
+      </div>
+
+      {/* Two-Column Clean Workspace: Syllabus & Quick Study Tools */}
+      <div
         style={{
           display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))',
-          gap: 16,
-          marginBottom: 32
+          gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
+          gap: 20,
+          alignItems: 'start'
         }}
       >
-        <div
-          style={{
-            background: 'var(--bg-surface)',
-            border: '1px solid var(--border-subtle)',
-            borderRadius: 'var(--radius-lg, 16px)',
-            padding: '18px 20px',
-            cursor: 'pointer'
-          }}
-          onClick={() => navigate('chapters')}
-        >
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 10 }}>
-            <small style={{ color: 'var(--text-muted)', fontSize: '0.82rem' }}>פרקים שנלמדו</small>
-            <BookOpen size={16} color="var(--primary)" />
+        {/* Left/Right Column 1: Syllabus Chapters Overview */}
+        <section className="surface" style={{ marginBottom: 0 }}>
+          <div className="section-title">
+            <h2 style={{ margin: 0, fontSize: '1.05rem' }}>סילבוס ופרקי הקורס</h2>
+            <button className="text-link" onClick={() => navigate('chapters')}>
+              כל הפרקים ({TOPICS.length}) <ChevronLeft size={14} />
+            </button>
           </div>
-          <div style={{ fontSize: '1.6rem', fontWeight: 800, color: 'var(--text-primary)', lineHeight: 1 }}>
-            {masteredTopics} <span style={{ fontSize: '0.95rem', color: 'var(--text-muted)', fontWeight: 500 }}>/ {TOPICS.length}</span>
-          </div>
-          <div style={{ marginTop: 10 }}>
-            <ProgressBar done={masteredTopics} total={TOPICS.length} />
-          </div>
-        </div>
 
-        <div
-          style={{
-            background: 'var(--bg-surface)',
-            border: '1px solid var(--border-subtle)',
-            borderRadius: 'var(--radius-lg, 16px)',
-            padding: '18px 20px',
-            cursor: 'pointer'
-          }}
-          onClick={() => navigate('practice')}
-        >
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 10 }}>
-            <small style={{ color: 'var(--text-muted)', fontSize: '0.82rem' }}>שאלות שנפתרו</small>
-            <HelpCircle size={16} color="var(--accent)" />
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
+            {TOPICS.slice(0, 6).map(topic => {
+              const status = getProgressValue(store.progress, `topic:${topic.id}`, 'not-started');
+              const isDone = status === 'mastered';
+              return (
+                <button
+                  key={topic.id}
+                  className="action-tile-clean"
+                  onClick={() => navigate(`chapter/${topic.id}`)}
+                  style={{ padding: '10px 12px' }}
+                >
+                  <div style={{ display: 'flex', alignItems: 'center', gap: 10, minWidth: 0 }}>
+                    <span
+                      style={{
+                        width: 24,
+                        height: 24,
+                        borderRadius: 6,
+                        background: isDone ? 'var(--success-subtle)' : 'var(--bg-elevated)',
+                        color: isDone ? 'var(--success)' : 'var(--text-secondary)',
+                        display: 'grid',
+                        placeItems: 'center',
+                        fontSize: '0.75rem',
+                        fontWeight: 700,
+                        flexShrink: 0
+                      }}
+                    >
+                      {isDone ? '✓' : topic.n}
+                    </span>
+                    <span style={{ fontWeight: 550, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                      {topic.title}
+                    </span>
+                  </div>
+                  <ChevronLeft size={15} color="var(--text-muted)" />
+                </button>
+              );
+            })}
           </div>
-          <div style={{ fontSize: '1.6rem', fontWeight: 800, color: 'var(--text-primary)', lineHeight: 1 }}>
-            {attemptedQuestions} <span style={{ fontSize: '0.95rem', color: 'var(--text-muted)', fontWeight: 500 }}>/ {QUESTIONS.length}</span>
-          </div>
-          <div style={{ marginTop: 10 }}>
-            <ProgressBar done={attemptedQuestions} total={QUESTIONS.length} />
-          </div>
-        </div>
+        </section>
 
-        <div
-          style={{
-            background: 'var(--bg-surface)',
-            border: '1px solid var(--border-subtle)',
-            borderRadius: 'var(--radius-lg, 16px)',
-            padding: '18px 20px',
-            cursor: 'pointer'
-          }}
-          onClick={() => navigate('cards')}
-        >
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 10 }}>
-            <small style={{ color: 'var(--text-muted)', fontSize: '0.82rem' }}>כרטיסיות בשליטה</small>
-            <Layers size={16} color="#f59e0b" />
+        {/* Column 2: Focused Study & Exam Tools */}
+        <section className="surface" style={{ marginBottom: 0 }}>
+          <div className="section-title">
+            <h2 style={{ margin: 0, fontSize: '1.05rem' }}>כלי תרגול והכנה למבחן</h2>
+            <small style={{ color: 'var(--text-muted)', fontSize: '0.78rem' }}>גישה ישירה</small>
           </div>
-          <div style={{ fontSize: '1.6rem', fontWeight: 800, color: 'var(--text-primary)', lineHeight: 1 }}>
-            {cardsKnown} <span style={{ fontSize: '0.95rem', color: 'var(--text-muted)', fontWeight: 500 }}>/ {CARDS.length}</span>
-          </div>
-          <div style={{ marginTop: 10 }}>
-            <ProgressBar done={cardsKnown} total={CARDS.length} />
-          </div>
-        </div>
 
-        <div
-          style={{
-            background: 'var(--bg-surface)',
-            border: '1px solid var(--border-subtle)',
-            borderRadius: 'var(--radius-lg, 16px)',
-            padding: '18px 20px',
-            cursor: 'pointer'
-          }}
-          onClick={() => navigate('errors')}
-        >
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 10 }}>
-            <small style={{ color: 'var(--text-muted)', fontSize: '0.82rem' }}>טעויות לחיזוק</small>
-            <AlertTriangle size={16} color={errorsCount > 0 ? 'var(--danger)' : 'var(--text-muted)'} />
-          </div>
-          <div style={{ fontSize: '1.6rem', fontWeight: 800, color: errorsCount > 0 ? 'var(--danger)' : 'var(--text-primary)', lineHeight: 1 }}>
-            {errorsCount}
-          </div>
-          <span style={{ fontSize: '0.78rem', color: 'var(--text-muted)', marginTop: 8, display: 'block' }}>
-            {errorsCount > 0 ? 'שאלות שדורשות חידוד' : 'אין טעויות פתוחות'}
-          </span>
-        </div>
-      </section>
-
-      {/* 3 Focused Academic Tracks */}
-      <section>
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 16 }}>
-          <h2 style={{ margin: 0, fontSize: '1.15rem', fontWeight: 700 }}>מוקדי למידה מרכזיים</h2>
-          <small style={{ color: 'var(--text-muted)' }}>גישה מהירה לכל כלי הפלטפורמה</small>
-        </div>
-
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(310px, 1fr))', gap: 16 }}>
-          {/* Pillar 1: Theory & Labs */}
-          <div
-            style={{
-              background: 'var(--bg-surface)',
-              border: '1px solid var(--border-subtle)',
-              borderRadius: 'var(--radius-xl, 20px)',
-              padding: 22
-            }}
-          >
-            <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 14 }}>
-              <div
-                style={{
-                  width: 34,
-                  height: 34,
-                  borderRadius: 10,
-                  background: 'var(--primary-subtle)',
-                  color: 'var(--primary)',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center'
-                }}
-              >
-                <BookOpen size={18} />
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+            <button className="action-tile-clean" onClick={() => navigate('practice')}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+                <HelpCircle size={16} color="var(--primary)" />
+                <div>
+                  <div style={{ fontWeight: 600 }}>בנק שאלות ותרגול</div>
+                  <small style={{ color: 'var(--text-muted)', fontSize: '0.76rem' }}>
+                    {QUESTIONS.length} שאלות ממבחנים עם רמזים ופתרון מלא
+                  </small>
+                </div>
               </div>
-              <div>
-                <h3 style={{ margin: 0, fontSize: '1rem', fontWeight: 700 }}>למידת תיאוריה</h3>
-                <small style={{ color: 'var(--text-muted)' }}>חומרי הלימוד והמעבדות</small>
-              </div>
-            </div>
+              <ChevronLeft size={15} />
+            </button>
 
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
-              <button
-                className="action-tile-clean"
-                onClick={() => navigate('chapters')}
-              >
-                <span>פרקי לימוד מלאים ({TOPICS.length})</span>
-                <ChevronLeft size={16} />
-              </button>
-              <button
-                className="action-tile-clean"
-                onClick={() => navigate('lab')}
-              >
-                <span>מעבדה והמחשות ויזואליות</span>
-                <ChevronLeft size={16} />
-              </button>
-              <button
-                className="action-tile-clean"
-                onClick={() => navigate('complexity')}
-              >
-                <span>טבלאות סיבוכיות ונוסחאות</span>
-                <ChevronLeft size={16} />
-              </button>
-            </div>
+            <button className="action-tile-clean" onClick={() => navigate('simulations')}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+                <Timer size={16} color="var(--primary)" />
+                <div>
+                  <div style={{ fontWeight: 600 }}>סימולציות מבחן בזמן אמת</div>
+                  <small style={{ color: 'var(--text-muted)', fontSize: '0.76rem' }}>
+                    {SIMS.length} בחינות מלאות עם שעון עצר וציון
+                  </small>
+                </div>
+              </div>
+              <ChevronLeft size={15} />
+            </button>
+
+            <button className="action-tile-clean" onClick={() => navigate('lab')}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+                <FlaskConical size={16} color="var(--primary)" />
+                <div>
+                  <div style={{ fontWeight: 600 }}>מעבדת אלגוריתמים חיה</div>
+                  <small style={{ color: 'var(--text-muted)', fontSize: '0.76rem' }}>
+                    הרצה ויזואלית צעד-אחר-צעד של מבני הנתונים
+                  </small>
+                </div>
+              </div>
+              <ChevronLeft size={15} />
+            </button>
+
+            <button className="action-tile-clean" onClick={() => navigate('cards')}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+                <Layers size={16} color="var(--primary)" />
+                <div>
+                  <div style={{ fontWeight: 600 }}>כרטיסיות זיכרון ודף נוסחאות</div>
+                  <small style={{ color: 'var(--text-muted)', fontSize: '0.76rem' }}>
+                    {CARDS.length} כרטיסיות לייטנר ודגשים ליום לפני המבחן
+                  </small>
+                </div>
+              </div>
+              <ChevronLeft size={15} />
+            </button>
+
+            <button className="action-tile-clean" onClick={() => navigate('studypack')}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+                <Wand2 size={16} color="var(--primary)" />
+                <div>
+                  <div style={{ fontWeight: 600 }}>ספר הקורס וסיכומי הרצאות</div>
+                  <small style={{ color: 'var(--text-muted)', fontSize: '0.76rem' }}>
+                    סיכומים מאוחדים, דגשי מרצה וייבוא תמלילים
+                  </small>
+                </div>
+              </div>
+              <ChevronLeft size={15} />
+            </button>
           </div>
-
-          {/* Pillar 2: Practice & Simulations */}
-          <div
-            style={{
-              background: 'var(--bg-surface)',
-              border: '1px solid var(--border-subtle)',
-              borderRadius: 'var(--radius-xl, 20px)',
-              padding: 22
-            }}
-          >
-            <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 14 }}>
-              <div
-                style={{
-                  width: 34,
-                  height: 34,
-                  borderRadius: 10,
-                  background: 'var(--accent-subtle)',
-                  color: 'var(--accent)',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center'
-                }}
-              >
-                <HelpCircle size={18} />
-              </div>
-              <div>
-                <h3 style={{ margin: 0, fontSize: '1rem', fontWeight: 700 }}>תרגול ובחינה</h3>
-                <small style={{ color: 'var(--text-muted)' }}>שאלות אמיתיות והערכה</small>
-              </div>
-            </div>
-
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
-              <button
-                className="action-tile-clean"
-                onClick={() => navigate('practice')}
-              >
-                <span>בנק שאלות מבחן ({QUESTIONS.length})</span>
-                <ChevronLeft size={16} />
-              </button>
-              <button
-                className="action-tile-clean"
-                onClick={() => navigate('simulations')}
-              >
-                <span>סימולציות מבחן שלמות ({SIMS.length})</span>
-                <ChevronLeft size={16} />
-              </button>
-              <button
-                className="action-tile-clean"
-                onClick={() => navigate('cards')}
-              >
-                <span>כרטיסיות זיכרון חכמות ({CARDS.length})</span>
-                <ChevronLeft size={16} />
-              </button>
-            </div>
-          </div>
-
-          {/* Pillar 3: Exam Prep & Strategy */}
-          <div
-            style={{
-              background: 'var(--bg-surface)',
-              border: '1px solid var(--border-subtle)',
-              borderRadius: 'var(--radius-xl, 20px)',
-              padding: 22
-            }}
-          >
-            <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 14 }}>
-              <div
-                style={{
-                  width: 34,
-                  height: 34,
-                  borderRadius: 10,
-                  background: 'var(--success-subtle)',
-                  color: 'var(--success)',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center'
-                }}
-              >
-                <Award size={18} />
-              </div>
-              <div>
-                <h3 style={{ margin: 0, fontSize: '1rem', fontWeight: 700 }}>הכנה לבחינה</h3>
-                <small style={{ color: 'var(--text-muted)' }}>אסטרטגיה וחידוד טעויות</small>
-              </div>
-            </div>
-
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
-              <button
-                className="action-tile-clean"
-                onClick={() => navigate('calendar')}
-              >
-                <span>יומן מבחנים ויעדים</span>
-                <ChevronLeft size={16} />
-              </button>
-              <button
-                className="action-tile-clean"
-                onClick={() => navigate('errors')}
-              >
-                <span>מאגר טעויות לחיזוק</span>
-                <ChevronLeft size={16} />
-              </button>
-              <button
-                className="action-tile-clean"
-                onClick={() => navigate('review')}
-              >
-                <span>יום לפני הבחינה (צ'ק ליסט)</span>
-                <ChevronLeft size={16} />
-              </button>
-            </div>
-          </div>
-        </div>
-      </section>
+        </section>
+      </div>
     </div>
   );
 }

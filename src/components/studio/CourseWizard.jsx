@@ -1,697 +1,940 @@
 import React, { useState, useRef } from 'react';
 import {
+  Plus,
+  Trash2,
+  UploadCloud,
+  Check,
+  AlertCircle,
+  X,
   Sparkles,
   BookOpen,
   FileText,
-  HelpCircle,
-  Clock,
-  CheckCircle2,
-  ChevronRight,
-  ChevronLeft,
-  GraduationCap,
-  UploadCloud,
-  FileCode,
-  Trash2,
-  Paperclip,
-  Check,
-  AlertCircle
+  FolderGit2,
+  FileCheck2,
+  Calculator,
+  Eye
 } from 'lucide-react';
 import { useCourse } from '../../context/CourseStore';
 import { compileCourseFromSources } from './CourseCompiler';
+import { parseRepositoryFile, REPO_CATEGORIES } from '../../utils/fileExtractor';
 import { navigate } from '../../utils/dom';
+
+const PRESET_REPOSITORIES = [
+  {
+    id: 'calc',
+    label: 'חדו״א 1',
+    title: 'חדו״א 1 (חשבון אינפיניטסימלי)',
+    code: '621103',
+    category: 'math',
+    institution: 'הפקולטה למדעים מדויקים',
+    topics: [
+      'שדה הממשיים, חסמים ואקסיומת השלמות',
+      'סדרות, גבול של סדרה ומשפטי גבולות',
+      'פונקציות ממשיות וגבולות של פונקציות',
+      'רציפות, משפטי ויירשטראס ומשפט ערך הביניים',
+      'נגזרות, כללי גזירה ומשפטי פרמה, רול ולגראנז׳',
+      'חקירת פונקציות, נקודות פיתול וכלל לופיטל',
+      'טורים מספריים ומבחני התכנסות'
+    ],
+    sampleFiles: [
+      {
+        id: 'sample-syl-1',
+        name: 'Syllabus_Calculus1_2026.txt',
+        ext: 'txt',
+        sizeFormatted: '4 KB',
+        category: 'syllabus',
+        content: '1. שדה הממשיים, חסמים ואקסיומת השלמות\n2. סדרות וגבול של סדרה\n3. רציפות ומשפטי הקטע הסגור\n4. נגזרות ומשפט לגראנז׳\n5. טורים ומבחני התכנסות'
+      },
+      {
+        id: 'sample-sum-1',
+        name: 'סיכום_הרצאות_רציפות_ונגזרות.md',
+        ext: 'md',
+        sizeFormatted: '18 KB',
+        category: 'summary',
+        content: 'משפט ערך הביניים (קוושי): אם f רציפה בקטע סגור [a,b] אז היא מקבלת כל ערך בין f(a) ל-f(b).\n\nמשפט ויירשטראס: פונקציה רציפה בקטע סגור חסומה בו ומקבלת בו מקסימום ומינימום מוחלטים.\n\nמשפט לגראנז׳ (ערך הממוצע): תהי f רציפה ב-[a,b] וגזירה ב-(a,b), אז קיימת נקודה c בקטע הפתוח שבה השיפוע המשיק שווה לשיפוע המיתר.'
+      },
+      {
+        id: 'sample-exam-1',
+        name: 'מבחן_חדוא1_2025_מועד_א_ופתרון.docx',
+        ext: 'docx',
+        sizeFormatted: '42 KB',
+        category: 'exam',
+        content: 'שאלה 1: הוכיחו לפי הגדרת הגבול כי הגבול של 3x+1 כאשר x שואף ל-2 הוא 7.\nפתרון: יהי אפסילון חיובי. נבחר דלתא שווה אפסילון חלקי 3 ואז לכל x המקיים |x-2| < delta מתקיים |3x+1 - 7| = 3|x-2| < epsilon.\n\nשאלה 2: תהי f פונקציה רציפה ב-[0,1] המקיימת f(0)=f(1). הוכיחו כי קיימת c כך ש-f(c)=f(c+0.5).\nפתרון: נגדיר פונקציית עזר g(x) = f(x+0.5) - f(x) בקטע [0, 0.5]. מתקיים g(0) = -g(0.5) ולכן לפי משפט ערך הביניים קיימת נקודת התאפסות.'
+      },
+      {
+        id: 'sample-form-1',
+        name: 'דף_נוסחאות_גזירה_וטורים.txt',
+        ext: 'txt',
+        sizeFormatted: '6 KB',
+        category: 'formula',
+        content: 'נגזרת מכפלה: (uv)\' = u\'v + uv\'\nכלל לופיטל: lim f(x)/g(x) = lim f\'(x)/g\'(x)\nטור הנדסי מתכנס: sum q^n = 1 / (1 - q) עבור |q| < 1'
+      }
+    ]
+  },
+  {
+    id: 'os',
+    label: 'מערכות הפעלה',
+    title: 'מערכות הפעלה',
+    code: '623413',
+    category: 'cs',
+    institution: 'הפקולטה למדעי המחשב',
+    topics: [
+      'מבוא למערכות הפעלה, פסיקות וקריאות מערכת (System Calls)',
+      'תהליכים (Processes), PCB והחלפת הקשר',
+      'חוטים (Threads) ומקבילות',
+      'תזמון מעבד (FCFS, SJF, Round Robin)',
+      'סנכרון תהליכים, מנעולים (Mutex) וסמפורים',
+      'קיפאון (Deadlocks) ואלגוריתם הבנקאי',
+      'ניהול זיכרון, דפדוף (Paging) וזיכרון וירטואלי'
+    ],
+    sampleFiles: [
+      {
+        id: 'os-syl-1',
+        name: 'OS_Syllabus_2026.txt',
+        ext: 'txt',
+        sizeFormatted: '3 KB',
+        category: 'syllabus',
+        content: '1. תהליכים וחוטים\n2. תזמון מעבד\n3. סנכרון תהליכים וסמפורים\n4. קיפאון (Deadlocks)\n5. זיכרון וירטואלי ודפדוף'
+      },
+      {
+        id: 'os-sum-1',
+        name: 'סיכום_סנכרון_וסמפורים.md',
+        ext: 'md',
+        sizeFormatted: '22 KB',
+        category: 'summary',
+        content: 'סמפור הוא כלי סנכרון בעל שתי פעולות אטומיות: wait (או P) ו-signal (או V).\n\nארבעת תנאי קופמן לקיפאון (Deadlock): מניעה הדדית, החזק והמתן, אין הפקעה, והמתנה מעגלית. שבירת אחד התנאים מונעת קיפאון.'
+      },
+      {
+        id: 'os-exam-1',
+        name: 'מבחן_מערכות_הפעלה_2025_מועד_א.docx',
+        ext: 'docx',
+        sizeFormatted: '38 KB',
+        category: 'exam',
+        content: 'שאלה 1: הסבירו מהו ההבדל המרכזי בין תהליך (Process) לחוט (Thread) מבחינת מרחב הזיכרון.\nפתרון: תהליכים רצים במרחבי כתובות וירטואליים נפרדים, בעוד שחוטים באותו תהליך חולקים את קוד התוכנית, המידע הגלובלי וה-Heap, אך מחזיקים מחסנית (Stack) ואוגרים משלהם.\n\nשאלה 2: מתי תזמון Round Robin מתנהג כמו FCFS?\nפתרון: כאשר קוונטום הזמן (Time Quantum) גדול יותר מזמן הריצה (Burst Time) של התהליך הארוך ביותר במערכת.'
+      }
+    ]
+  }
+];
 
 export function CourseWizard({ onClose }) {
   const { createCourse } = useCourse();
-  const [currentStep, setCurrentStep] = useState(1);
-  const [isCompiling, setIsCompiling] = useState(false);
-  const [notification, setNotification] = useState(null);
+  const universalInputRef = useRef(null);
+  const bucketInputRef = useRef(null);
+  const [activeBucketUpload, setActiveBucketUpload] = useState(null);
 
-  // Form State
-  const [formData, setFormData] = useState({
-    title: '',
-    titleEn: '',
-    code: '',
-    institution: '',
-    category: 'math',
-    credits: '4.00',
-    lecturers: '',
-    tutors: '',
-    year: 'תשפ״ו',
-    semester: 'סמסטר א׳',
-    examDuration: '3 שעות',
-    examStructure: '2 שאלות פתוחות + 6 שאלות ברירה אמריקאיות',
-    syllabusRaw: '',
-    studyMaterialsRaw: '',
-    examsRaw: ''
-  });
+  // Course Identity
+  const [title, setTitle] = useState('');
+  const [code, setCode] = useState('');
+  const [category, setCategory] = useState('cs');
+  const [institution, setInstitution] = useState('');
 
-  // Track uploaded files per step
-  const [stepFiles, setStepFiles] = useState({
-    step1: [],
-    step2: [],
-    step3: [],
-    step4: [],
-    step5: []
-  });
+  // Repository Files State
+  const [repoFiles, setRepoFiles] = useState([]);
+  const [activeBucketFilter, setActiveBucketFilter] = useState('all');
+  const [previewFile, setPreviewFile] = useState(null);
+  const [isDragging, setIsDragging] = useState(false);
 
-  const updateField = (field, val) => {
-    setFormData(prev => ({ ...prev, [field]: val }));
+  // Extracted / Editable Chapters
+  const [topics, setTopics] = useState([]);
+  const [newTopicText, setNewTopicText] = useState('');
+
+  // Quick Text Snippet Modal/Input (for pasting raw text directly into the repo)
+  const [showTextAdder, setShowTextAdder] = useState(false);
+  const [snippetTitle, setSnippetTitle] = useState('');
+  const [snippetCategory, setSnippetCategory] = useState('exam');
+  const [snippetContent, setSnippetContent] = useState('');
+
+  const [notice, setNotice] = useState(null);
+
+  const triggerNotice = (msg, type = 'success') => {
+    setNotice({ msg, type });
+    setTimeout(() => setNotice(null), 4500);
   };
 
-  const showNotice = (msg, type = 'success') => {
-    setNotification({ msg, type });
-    setTimeout(() => setNotification(null), 5000);
-  };
-
-  // Helper: Read and parse uploaded files
-  const handleFileUpload = async (e, stepKey) => {
-    const files = Array.from(e.target.files || []);
+  // Process dropped or selected files into the Repository
+  const ingestFiles = async (fileList, forcedCategory = null) => {
+    const files = Array.from(fileList || []);
     if (files.length === 0) return;
 
-    const newFilesMeta = [];
+    const parsedItems = [];
+    let extractedTopics = [...topics];
+    let detectedTitle = title;
+    let detectedCode = code;
+    let detectedInst = institution;
 
     for (const file of files) {
-      const ext = file.name.split('.').pop().toLowerCase();
-      newFilesMeta.push({
-        name: file.name,
-        size: (file.size / 1024).toFixed(1) + ' KB',
-        type: ext
-      });
+      const repoItem = await parseRepositoryFile(file, forcedCategory);
+      parsedItems.push(repoItem);
 
-      // 1. JSON handling (auto-detect full course or partial structures)
-      if (ext === 'json') {
-        try {
-          const text = await file.text();
-          const parsed = JSON.parse(text);
+      // If full JSON course export
+      if (repoItem.parsedJson && (repoItem.parsedJson.courseData || repoItem.parsedJson.COURSE)) {
+        const cd = repoItem.parsedJson.courseData || repoItem.parsedJson;
+        const cInfo = cd.COURSE || {};
+        if (cInfo.name && !detectedTitle) detectedTitle = cInfo.name;
+        if (cInfo.code && !detectedCode) detectedCode = cInfo.code;
+        if (cInfo.inst && !detectedInst) detectedInst = cInfo.inst;
+        if (Array.isArray(cd.TOPICS) && cd.TOPICS.length > 0) {
+          extractedTopics = cd.TOPICS.map(t => t.title || t.name).filter(Boolean);
+        }
+        continue;
+      }
 
-          // If it's a full course export:
-          if (parsed.courseData || parsed.COURSE) {
-            const cd = parsed.courseData || parsed;
-            const cInfo = cd.COURSE || {};
-            setFormData(prev => ({
-              ...prev,
-              title: cInfo.name || prev.title,
-              titleEn: cInfo.nameEn || prev.titleEn,
-              code: cInfo.code || prev.code,
-              institution: cInfo.inst || prev.institution,
-              credits: cInfo.credits ? String(cInfo.credits).replace(/[^0-9.]/g, '') : prev.credits,
-              lecturers: cInfo.lecturers || prev.lecturers,
-              tutors: cInfo.tutors || prev.tutors,
-              syllabusRaw: (cd.TOPICS || []).map((t, idx) => `${idx + 1}. ${t.title || t.name}`).join('\n') || prev.syllabusRaw,
-              studyMaterialsRaw: (cd.TOPICS || []).flatMap(t => (t.sec || []).map(s => `${s.h}:\n${s.html || ''}`)).join('\n\n') || prev.studyMaterialsRaw,
-              examsRaw: (cd.QUESTIONS || []).map((q, idx) => `שאלה ${idx + 1}: ${q.q || ''}\nפתרון: ${q.sol || ''}`).join('\n\n') || prev.examsRaw
-            }));
-            showNotice(`הקובץ "${file.name}" זוהה כחבילת קורס מלאה! כל השדות מולאו אוטומטית.`);
-            continue;
-          }
+      // If syllabus file, auto-extract topics list
+      if (repoItem.category === 'syllabus' && repoItem.content) {
+        const lines = repoItem.content
+          .split('\n')
+          .map(l => l.trim())
+          .filter(Boolean);
 
-          // If it's a syllabus or topics JSON array:
-          if (Array.isArray(parsed)) {
-            const listText = parsed.map((item, idx) => typeof item === 'string' ? `${idx + 1}. ${item}` : `${idx + 1}. ${item.title || item.name || JSON.stringify(item)}`).join('\n');
-            if (stepKey === 'step2') {
-              updateField('syllabusRaw', prev => prev ? `${prev}\n${listText}` : listText);
-            }
-          }
-        } catch (err) {
-          console.warn('Failed parsing JSON file', err);
+        const numbered = lines
+          .filter(l => /^[0-9]+[.\-)]|^[-•*]/.test(l))
+          .map(l => l.replace(/^[0-9]+[.\-)]\s*/, '').replace(/^[-*•]\s*/, '').trim())
+          .filter(l => l.length > 2 && l.length < 110);
+
+        if (numbered.length >= 2) {
+          extractedTopics = numbered;
+        } else if (extractedTopics.length === 0) {
+          extractedTopics = lines.filter(l => l.length > 3 && l.length < 90).slice(0, 12);
         }
       }
 
-      // 2. Text / Markdown / Code / TeX files
-      else if (['txt', 'md', 'tex', 'csv', 'html', 'js'].includes(ext)) {
-        try {
-          const text = await file.text();
-          if (stepKey === 'step2') {
-            updateField('syllabusRaw', prev => prev ? `${prev}\n\n// מקור: ${file.name}\n${text}` : text);
-          } else if (stepKey === 'step3') {
-            updateField('studyMaterialsRaw', prev => prev ? `${prev}\n\n// מקור: ${file.name}\n${text}` : text);
-          } else if (stepKey === 'step4') {
-            updateField('examsRaw', prev => prev ? `${prev}\n\n// מקור: ${file.name}\n${text}` : text);
-          } else if (stepKey === 'step1') {
-            // Suggest title from first lines
-            const lines = text.split('\n').map(l => l.trim()).filter(Boolean);
-            if (lines.length > 0 && !formData.title) {
-              updateField('title', lines[0].slice(0, 50));
-            }
-            updateField('syllabusRaw', prev => prev ? `${prev}\n${text}` : text);
-          }
-          showNotice(`הקובץ "${file.name}" נטען והתוכן נוסף בהצלחה.`);
-        } catch (err) {
-          console.warn('Failed reading text file', err);
-        }
-      }
-
-      // 3. Binary docs (DOCX, PDF) - Extract XML text if possible, register file
-      else {
-        try {
-          const text = await file.text();
-          // Extract plain text between tags if DOCX XML strings exist
-          const cleanText = text.replace(/<[^>]+>/g, ' ').replace(/[^\u0590-\u05FFa-zA-Z0-9\s.,?!:;()\-]/g, ' ').replace(/\s+/g, ' ').trim();
-          if (cleanText.length > 60) {
-            if (stepKey === 'step2') {
-              updateField('syllabusRaw', prev => prev ? `${prev}\n\n// מקור: ${file.name}\n${cleanText}` : cleanText);
-            } else if (stepKey === 'step3') {
-              updateField('studyMaterialsRaw', prev => prev ? `${prev}\n\n// מקור: ${file.name}\n${cleanText}` : cleanText);
-            } else if (stepKey === 'step4') {
-              updateField('examsRaw', prev => prev ? `${prev}\n\n// מקור: ${file.name}\n${cleanText}` : cleanText);
-            }
-            showNotice(`הקובץ "${file.name}" נקרא והטקסט חולץ בהצלחה.`);
-          } else {
-            showNotice(`הקובץ "${file.name}" נרשם כמסמך מקור עבור הקורס.`);
-          }
-        } catch (err) {
-          showNotice(`הקובץ "${file.name}" צורף בהצלחה.`);
+      // Suggest course title from first uploaded filename if still empty
+      if (!detectedTitle) {
+        const cleanName = file.name
+          .replace(/\.[^/.]+$/, '')
+          .replace(/syllabus|exam|summary|סילבוס|מבחן|סיכום|פתרון|מועד|[0-9_-]/gi, ' ')
+          .replace(/\s+/g, ' ')
+          .trim();
+        if (cleanName.length >= 3) {
+          detectedTitle = cleanName;
         }
       }
     }
 
-    setStepFiles(prev => ({
-      ...prev,
-      [stepKey]: [...prev[stepKey], ...newFilesMeta]
-    }));
+    if (detectedTitle !== title) setTitle(detectedTitle);
+    if (detectedCode !== code) setCode(detectedCode);
+    if (detectedInst !== institution) setInstitution(detectedInst);
+    if (extractedTopics.length > 0) setTopics(extractedTopics);
 
-    e.target.value = '';
+    setRepoFiles(prev => [...prev, ...parsedItems]);
+    triggerNotice(`נוספו ${parsedItems.length} קבצים למאגר הקורס ונותחו אוטומטית!`);
   };
 
-  const removeFile = (stepKey, index) => {
-    setStepFiles(prev => ({
-      ...prev,
-      [stepKey]: prev[stepKey].filter((_, i) => i !== index)
-    }));
+  const handleLoadPresetRepo = (preset) => {
+    setTitle(preset.title);
+    setCode(preset.code);
+    setCategory(preset.category);
+    setInstitution(preset.institution);
+    setTopics(preset.topics);
+    setRepoFiles(preset.sampleFiles);
+    triggerNotice(`נטען מאגר דוגמה מלא עבור "${preset.label}" (כולל סילבוס, סיכומים ומבחני עבר).`);
   };
 
-  const loadPreset = (type) => {
-    if (type === 'calc') {
-      setFormData({
-        title: 'חדו״א 1 (חשבון אינפיניטסימלי)',
-        titleEn: 'Calculus 1',
-        code: '621103',
-        institution: 'הפקולטה למדעים מדויקים',
-        category: 'math',
-        credits: '5.00',
-        lecturers: 'פרופ׳ אהרון גולד',
-        tutors: 'רוני שלום, שיר אטיאס',
-        year: 'תשפ״ו',
-        semester: 'סמסטר א׳',
-        examDuration: '3 שעות',
-        examStructure: '3 שאלות הוכחה וחישוב + 5 שאלות ברירה',
-        syllabusRaw: `1. שדה הממשיים, חסמים ואקסיומת השלמות\n2. סדרות, גבול של סדרה ומשפטי גבולות\n3. פונקציות ממשיות וגבולות של פונקציות\n4. רציפות, משפטי ויירשטראס ומשפט ערך הביניים\n5. נגזרות, כללי גזירה ומשפטי פרמה, רול ולגראנז׳\n6. חקירת פונקציות, נקודות פיתול ואסימפטוטות\n7. טורים מספריים ומבחני התכנסות`,
-        studyMaterialsRaw: `משפט לגראנז׳ (ערך הממוצע): תהי f רציפה ב-[a,b] וגזירה ב-(a,b). אזי קיימת c ב-(a,b) כך ש-f'(c) = (f(b)-f(a))/(b-a).\nאקסיומת השלמות: לכל תת-קבוצה לא ריקה וחסומה מלעיל של R קיים חסם עליון (סופרמום).\nכלל לופיטל: כאשר מקבלים גבול מגבול 0/0 או inf/inf ניתן לגזור מונה ומכנה בנפרד.`,
-        examsRaw: `שאלה 1 (2025 א׳ מועד א׳): הוכיחו לפי הגדרת הגבול של קושי כי lim_{x->2} (3x + 1) = 7.\nשאלה 2 (2025 א׳ מועד ב׳): תהי f רציפה ב-[0,1] כך ש-f(0)=f(1). הוכיחו שקיימת c כך ש-f(c) = f(c + 1/2).`
-      });
-      showNotice('תבנית חדו״א 1 נטענה בהצלחה');
-    } else if (type === 'os') {
-      setFormData({
-        title: 'מערכות הפעלה',
-        titleEn: 'Operating Systems',
-        code: '623413',
-        institution: 'הפקולטה למדעי המחשב',
-        category: 'cs',
-        credits: '4.00',
-        lecturers: 'ד"ר מיכאל ברגר',
-        tutors: 'איתמר גלבוע, עדן שוורץ',
-        year: 'תשפ״ו',
-        semester: 'סמסטר ב׳',
-        examDuration: '2.5 שעות',
-        examStructure: 'שאלות ניתוח זיכרון, Threads וסנכרון',
-        syllabusRaw: `1. מבוא למערכות הפעלה, פסיקות וקריאות מערכת (System Calls)\n2. תהליכים (Processes) וחוטים (Threads)\n3. תזמון מעבד (CPU Scheduling - FCFS, SJF, Round Robin)\n4. סנכרון תהליכים, קטע קריטי, מנעולים וסמפורים (Semaphores)\n5. קיפאון (Deadlocks) ומניעת קיפאון (Banker's Algorithm)\n6. ניהול זיכרון, דפדוף (Paging) וזיכרון וירטואלי\n7. מערכות קבצים (File Systems) וניהול דיסק`,
-        studyMaterialsRaw: `סמפור הוא משתנה שלם המאפשר סנכרון עם שתי פעולות אטומיות: wait() (או P) ו-signal() (או V).\nתנאי קופמן לקיפאון: 1. הדדיות (Mutual Exclusion) 2. החזק והמתן 3. אין הפקעה 4. המתנה מעגלית.`,
-        examsRaw: `שאלה 1 (מבחן 2025): ממשו פתרון לבעיית הקוראים והכותבים באמצעות סמפורים כך שאין הרעבה לקוראים.\nשאלה 2 (מבחן 2025): חשבו את זמן ההמתנה הממוצע בשיטת Round Robin עם Quantum = 4ms.`
-      });
-      showNotice('תבנית מערכות הפעלה נטענה בהצלחה');
+  const handleAddTextSnippet = () => {
+    if (!snippetContent.trim()) return;
+    const defaultName =
+      snippetTitle.trim() ||
+      (snippetCategory === 'exam'
+        ? `מבחן_עבר_${repoFiles.filter(f => f.category === 'exam').length + 1}.txt`
+        : snippetCategory === 'syllabus'
+        ? 'סילבוס_הקורס.txt'
+        : `סיכום_הרצאה_${repoFiles.filter(f => f.category === 'summary').length + 1}.txt`);
+
+    const newItem = {
+      id: `repo-snippet-${Date.now()}`,
+      name: defaultName,
+      ext: 'txt',
+      sizeFormatted: `${Math.max(1, Math.round(snippetContent.length / 500))} KB`,
+      category: snippetCategory,
+      content: snippetContent.trim(),
+      addedAt: Date.now()
+    };
+
+    setRepoFiles(prev => [...prev, newItem]);
+
+    if (snippetCategory === 'syllabus') {
+      const lines = snippetContent
+        .split('\n')
+        .map(l => l.replace(/^[0-9]+[.\-)]\s*/, '').replace(/^[-*•]\s*/, '').trim())
+        .filter(l => l.length > 2);
+      if (lines.length > 0) setTopics(lines);
     }
+
+    setSnippetTitle('');
+    setSnippetContent('');
+    setShowTextAdder(false);
+    triggerNotice(`הטקסט נשמר כקובץ "${defaultName}" במאגר הקורס.`);
   };
 
-  const handleCompileAndPublish = () => {
-    if (!formData.title.trim()) {
-      alert('אנא הזן לפחות את שם הקורס!');
+  const handleChangeFileCategory = (id, newCat) => {
+    setRepoFiles(prev => prev.map(f => (f.id === id ? { ...f, category: newCat } : f)));
+  };
+
+  const handleRemoveRepoFile = (id) => {
+    setRepoFiles(prev => prev.filter(f => f.id !== id));
+    if (previewFile?.id === id) setPreviewFile(null);
+  };
+
+  const handleAddTopic = () => {
+    const trimmed = newTopicText.trim();
+    if (!trimmed) return;
+    setTopics(prev => [...prev, trimmed]);
+    setNewTopicText('');
+  };
+
+  const handleBuildCourseFromRepo = () => {
+    if (!title.trim()) {
+      triggerNotice('נא להזין את שם הקורס לפני בניית האתר', 'error');
       return;
     }
 
-    setIsCompiling(true);
-    setTimeout(() => {
-      // Gather all uploaded files across steps to include in inventoryData
-      const allFiles = Object.entries(stepFiles).flatMap(([step, files]) =>
-        files.map(f => ({
-          filename: f.name,
-          path: f.name,
-          classification: step === 'step1' ? 'סילבוס רשמי' : step === 'step2' ? 'סילבוס ונושאים' : step === 'step3' ? 'חומרי לימוד ומצגות' : step === 'step4' ? 'שאלוני בחינה' : 'חבילת קורס'
-        }))
-      );
+    const compiled = compileCourseFromSources({
+      title: title.trim(),
+      code: code.trim(),
+      institution: institution.trim(),
+      category,
+      customTopicsList: topics.map(t => t.trim()).filter(Boolean),
+      repositoryFiles: repoFiles
+    });
 
-      const generated = compileCourseFromSources({
-        ...formData,
-        uploadedFiles: allFiles
-      });
-
-      createCourse(generated);
-      setIsCompiling(false);
-      try {
-        localStorage.setItem('courseforge_has_selected', 'true');
-      } catch (e) {}
-      if (onClose) onClose();
-      navigate('home');
-    }, 800);
+    createCourse(compiled);
+    if (onClose) onClose();
+    navigate('home');
   };
 
-  const steps = [
-    { num: 1, title: 'פרטי הקורס', icon: <GraduationCap size={18} /> },
-    { num: 2, title: 'סילבוס ונושאים', icon: <BookOpen size={18} /> },
-    { num: 3, title: 'חומרי לימוד', icon: <FileText size={18} /> },
-    { num: 4, title: 'מבחנים ושאלות', icon: <HelpCircle size={18} /> },
-    { num: 5, title: 'בחינה והפקה', icon: <Clock size={18} /> }
-  ];
+  // Counts per bucket
+  const counts = {
+    all: repoFiles.length,
+    syllabus: repoFiles.filter(f => f.category === 'syllabus').length,
+    summary: repoFiles.filter(f => f.category === 'summary').length,
+    exam: repoFiles.filter(f => f.category === 'exam').length,
+    formula: repoFiles.filter(f => f.category === 'formula').length
+  };
 
-  // Helper render component for step file uploader
-  const renderUploader = (stepKey, label, subtext, accept = '.txt,.md,.json,.pdf,.docx,.tex,.csv') => {
-    const inputRef = useRef(null);
-    const files = stepFiles[stepKey] || [];
+  const visibleFiles = activeBucketFilter === 'all'
+    ? repoFiles
+    : repoFiles.filter(f => f.category === activeBucketFilter);
 
-    return (
+  return (
+    <div className="search-overlay" onClick={onClose} style={{ padding: '3vh 16px' }}>
       <div
-        className="wizard-uploader-box"
+        className="search-dialog"
+        role="dialog"
+        aria-modal="true"
+        aria-label="מאגר קבצים ומחולל קורס חדש"
+        onClick={e => e.stopPropagation()}
         style={{
-          border: '2px dashed var(--border)',
-          borderRadius: 'var(--radius-lg)',
-          padding: 16,
-          background: 'var(--bg-elevated)',
-          marginBottom: 16,
-          transition: 'border-color 0.2s ease'
+          maxWidth: 860,
+          width: '100%',
+          maxHeight: '92vh',
+          display: 'flex',
+          flexDirection: 'column',
+          overflow: 'hidden'
         }}
       >
-        <input
-          ref={inputRef}
-          type="file"
-          accept={accept}
-          multiple
-          style={{ display: 'none' }}
-          onChange={e => handleFileUpload(e, stepKey)}
-        />
-
-        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: 12 }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
-            <div
-              style={{
-                width: 40,
-                height: 40,
-                borderRadius: '50%',
-                background: 'var(--primary-soft)',
-                color: 'var(--primary)',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                flexShrink: 0
-              }}
-            >
-              <UploadCloud size={20} />
+        {/* Header */}
+        <div
+          style={{
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'flex-start',
+            padding: '18px 24px 14px',
+            borderBottom: '1px solid var(--border-subtle)'
+          }}
+        >
+          <div>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: 4 }}>
+              <FolderGit2 size={15} color="var(--primary)" />
+              <span className="eyebrow" style={{ margin: 0 }}>Course Repository Builder</span>
             </div>
-            <div>
-              <b style={{ color: 'var(--text-primary)', fontSize: '0.92rem', display: 'block' }}>{label}</b>
-              <small style={{ color: 'var(--text-muted)', fontSize: '0.8rem' }}>{subtext}</small>
-            </div>
+            <h2 style={{ margin: 0, fontSize: '1.3rem', fontWeight: 800 }}>
+              הקמת מאגר קורס חדש (סילבוס, סיכומים ומבחני עבר)
+            </h2>
+            <p style={{ margin: '3px 0 0', fontSize: '0.84rem', color: 'var(--text-muted)' }}>
+              העלה את כל קובצי הקורס שלך למאגר — המחולל יקרא את הסילבוס, הסיכומים ומבחני העבר ויבנה מהם אתר למידה שלם.
+            </p>
           </div>
-
-          <button
-            type="button"
-            className="ghost-button"
-            onClick={() => inputRef.current?.click()}
-            style={{
-              display: 'inline-flex',
-              alignItems: 'center',
-              gap: 6,
-              padding: '8px 14px',
-              fontSize: '0.85rem',
-              borderRadius: 'var(--radius-md)',
-              border: '1px solid var(--border)',
-              background: 'var(--bg-surface)'
-            }}
-          >
-            <Paperclip size={15} />
-            <span>בחר קבצים להעלאה</span>
+          <button type="button" className="icon-button" onClick={onClose} aria-label="סגור">
+            <X size={16} />
           </button>
         </div>
 
-        {files.length > 0 && (
-          <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, marginTop: 12, paddingTop: 10, borderTop: '1px solid var(--border)' }}>
-            {files.map((f, idx) => (
-              <span
-                key={idx}
-                className="pill"
-                style={{
-                  background: 'var(--bg-surface)',
-                  border: '1px solid var(--border)',
-                  color: 'var(--text-primary)',
-                  fontSize: '0.78rem',
-                  display: 'inline-flex',
-                  alignItems: 'center',
-                  gap: 6,
-                  padding: '4px 10px'
-                }}
-              >
-                <FileCode size={13} style={{ color: 'var(--primary)' }} />
-                <span>{f.name} ({f.size})</span>
-                <button
-                  type="button"
-                  onClick={() => removeFile(stepKey, idx)}
-                  style={{ background: 'none', border: 'none', padding: 0, cursor: 'pointer', color: 'var(--red)', display: 'flex' }}
-                  title="הסר קובץ"
-                >
-                  <Trash2 size={12} />
-                </button>
-              </span>
-            ))}
-          </div>
-        )}
-      </div>
-    );
-  };
-
-  return (
-    <div className="search-overlay" onClick={onClose}>
-      <div
-        className="search-dialog wizard-dialog"
-        role="dialog"
-        aria-modal="true"
-        aria-label="אשף יצירת אתר קורס חדש"
-        onClick={e => e.stopPropagation()}
-        style={{ maxWidth: 860, width: '94%', maxHeight: '90vh', overflowY: 'auto' }}
-      >
-        <div className="wizard-header">
-          <div>
-            <span className="eyebrow">CourseForge Studio</span>
-            <h2 style={{ margin: '4px 0 6px 0', fontSize: '1.45rem' }}>יצירת אתר למידה אינטראקטיבי לקורס חדש</h2>
-            <p style={{ margin: 0, color: 'var(--text-muted)', fontSize: '0.9rem' }}>
-              העלה קבצים או הדבק טקסט בכל שלב (סילבוס, מצגות, סיכומים ושאלונים). המערכת תייצר עבורך אתר למידה מלא.
-            </p>
-          </div>
-          <div className="preset-buttons" style={{ display: 'flex', alignItems: 'center', gap: 8, flexWrap: 'wrap', marginTop: 12 }}>
-            <span style={{ fontSize: '0.82rem', color: 'var(--text-muted)' }}>תבניות מהירות לדוגמה:</span>
-            <button className="pill" onClick={() => loadPreset('calc')}>📐 חדו״א 1 (מתמטיקה)</button>
-            <button className="pill" onClick={() => loadPreset('os')}>💻 מערכות הפעלה (מדמ״ח)</button>
-          </div>
-        </div>
-
-        {notification && (
+        {/* Main Scrollable Content */}
+        <div style={{ padding: '18px 24px', overflowY: 'auto', flex: 1 }}>
+          {/* Quick Demo Repositories Bar */}
           <div
             style={{
-              margin: '12px 0',
-              padding: '10px 14px',
-              borderRadius: 'var(--radius-md)',
-              background: notification.type === 'success' ? 'rgba(34, 197, 94, 0.12)' : 'rgba(239, 68, 68, 0.12)',
-              border: notification.type === 'success' ? '1px solid var(--green)' : '1px solid var(--red)',
               display: 'flex',
               alignItems: 'center',
+              justifyContent: 'space-between',
+              flexWrap: 'wrap',
               gap: 8,
-              fontSize: '0.88rem',
-              color: 'var(--text-primary)'
+              marginBottom: 16,
+              padding: '8px 12px',
+              borderRadius: 10,
+              background: 'var(--bg-page)',
+              border: '1px solid var(--border-subtle)'
             }}
           >
-            {notification.type === 'success' ? <Check size={16} style={{ color: 'var(--green)' }} /> : <AlertCircle size={16} style={{ color: 'var(--red)' }} />}
-            <span>{notification.msg}</span>
-          </div>
-        )}
+            <div style={{ display: 'flex', alignItems: 'center', gap: 6, flexWrap: 'wrap' }}>
+              <span style={{ fontSize: '0.78rem', fontWeight: 600, color: 'var(--text-muted)' }}>
+                טען מאגר קורס מוכן להדגמה:
+              </span>
+              {PRESET_REPOSITORIES.map(preset => (
+                <button
+                  key={preset.id}
+                  type="button"
+                  className="ghost-button"
+                  onClick={() => handleLoadPresetRepo(preset)}
+                  style={{ padding: '4px 10px', fontSize: '0.78rem', borderRadius: 6 }}
+                >
+                  {preset.label}
+                </button>
+              ))}
+            </div>
 
-        {/* Wizard Steps Bar */}
-        <div className="wizard-stepper" style={{ marginTop: 16 }}>
-          {steps.map(s => (
             <button
-              key={s.num}
-              className={`wizard-step-btn ${currentStep === s.num ? 'active' : currentStep > s.num ? 'done' : ''}`}
-              onClick={() => setCurrentStep(s.num)}
+              type="button"
+              className="ghost-button"
+              onClick={() => setShowTextAdder(!showTextAdder)}
+              style={{ padding: '4px 10px', fontSize: '0.78rem', borderRadius: 6 }}
             >
-              <span className="step-circle">{currentStep > s.num ? <CheckCircle2 size={16} /> : s.num}</span>
-              <span>{s.title}</span>
+              <Plus size={13} />
+              <span>הדבק טקסט ישירות למאגר</span>
             </button>
-          ))}
-        </div>
-
-        {/* Wizard Step Content */}
-        <div className="wizard-body surface" style={{ marginTop: 16, padding: 22, borderRadius: 'var(--radius-lg)' }}>
-          {/* STEP 1 */}
-          {currentStep === 1 && (
-            <div className="step-content">
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 10 }}>
-                <h3 style={{ margin: 0 }}>שלב 1: פרטי הקורס והגדרות בסיס</h3>
-                <small style={{ color: 'var(--text-muted)' }}>ניתן להעלות קובץ סילבוס למילוי אוטומטי</small>
-              </div>
-
-              {renderUploader(
-                'step1',
-                'העלאת קובץ סילבוס / קורס למילוי אוטומטי (PDF, DOCX, TXT, JSON)',
-                'העלה קובץ סילבוס רשמי או חבילת JSON שלמה של הקורס לחילוץ אוטומטי של הפרטים'
-              )}
-
-              <div className="form-row" style={{ marginTop: 14 }}>
-                <label>
-                  תחום הקורס
-                  <select value={formData.category} onChange={e => updateField('category', e.target.value)}>
-                    <option value="math">📐 מתמטיקה ומדעים מדויקים (בדידה, ליניארית, חדו״א)</option>
-                    <option value="cs">💻 מדעי המחשב ואלגוריתמים</option>
-                    <option value="web">🌐 פיתוח תוכנה ואפליקציות אינטרנט</option>
-                    <option value="general">📚 קורס אקדמי כללי / הנדסי</option>
-                  </select>
-                </label>
-
-                <label className="grow">
-                  שם הקורס (עברית) *
-                  <input
-                    value={formData.title}
-                    onChange={e => updateField('title', e.target.value)}
-                    placeholder="לדוגמה: מתמטיקה בדידה, חדו״א 1, מערכות הפעלה"
-                    required
-                  />
-                </label>
-              </div>
-
-              <div className="form-row">
-                <label>
-                  קוד קורס
-                  <input
-                    value={formData.code}
-                    onChange={e => updateField('code', e.target.value)}
-                    placeholder="לדוגמה: 621101"
-                  />
-                </label>
-
-                <label className="grow">
-                  שם הקורס (באנגלית)
-                  <input
-                    value={formData.titleEn}
-                    onChange={e => updateField('titleEn', e.target.value)}
-                    placeholder="לדוגמה: Discrete Mathematics"
-                  />
-                </label>
-
-                <label>
-                  מוסד אקדמי
-                  <input
-                    value={formData.institution}
-                    onChange={e => updateField('institution', e.target.value)}
-                    placeholder="לדוגמה: המסלול האקדמי המכללה למינהל"
-                  />
-                </label>
-              </div>
-
-              <div className="form-row">
-                <label>
-                  נקודות זכות (נ"ז)
-                  <input
-                    value={formData.credits}
-                    onChange={e => updateField('credits', e.target.value)}
-                    placeholder="4.00"
-                  />
-                </label>
-                <label className="grow">
-                  מרצים
-                  <input
-                    value={formData.lecturers}
-                    onChange={e => updateField('lecturers', e.target.value)}
-                    placeholder="פרופ׳..., ד״ר..."
-                  />
-                </label>
-                <label className="grow">
-                  מתרגלים
-                  <input
-                    value={formData.tutors}
-                    onChange={e => updateField('tutors', e.target.value)}
-                    placeholder="שמות המתרגלים"
-                  />
-                </label>
-              </div>
-            </div>
-          )}
-
-          {/* STEP 2 */}
-          {currentStep === 2 && (
-            <div className="step-content">
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 10 }}>
-                <h3 style={{ margin: 0 }}>שלב 2: סילבוס ורשימת נושאי הקורס</h3>
-                <small style={{ color: 'var(--text-muted)' }}>כל סעיף ממוספר יהפוך לפרק לימוד שלם</small>
-              </div>
-
-              {renderUploader(
-                'step2',
-                'העלאת קובץ סילבוס או רשימת נושאים (TXT, MD, PDF, DOCX, JSON)',
-                'העלה קובץ נושאים. הטקסט יחולץ אוטומטית ויתווסף לתיבה מטה'
-              )}
-
-              <label className="answer-label" style={{ marginTop: 12 }}>
-                רשימת נושאי הסילבוס (שורה לכל נושא / פרק, או ערוך ידנית):
-                <textarea
-                  value={formData.syllabusRaw}
-                  onChange={e => updateField('syllabusRaw', e.target.value)}
-                  placeholder={`1. לוגיקה פסוקית ופרדיקטים\n2. תורת הקבוצות וקבוצת החזקה\n3. יחסים ויחסי שקילות\n4. אינדוקציה מתמטית ורקורסיה\n5. קומבינטוריקה וספירה`}
-                  rows={9}
-                />
-              </label>
-            </div>
-          )}
-
-          {/* STEP 3 */}
-          {currentStep === 3 && (
-            <div className="step-content">
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 10 }}>
-                <h3 style={{ margin: 0 }}>שלב 3: חומרי לימוד, סיכומים, הגדרות ונוסחאות</h3>
-                <small style={{ color: 'var(--text-muted)' }}>תומך בנוסחאות KaTeX, קוד ומסמכים</small>
-              </div>
-
-              {renderUploader(
-                'step3',
-                'העלאת סיכומים, מצגות, דפי נוסחאות וקוד (TXT, MD, TEX, PDF, DOCX, JSON)',
-                'ניתן להעלות מספר קבצים במקביל. תוכנם ייסרק ויסווג לפרקי הלימוד'
-              )}
-
-              <label className="answer-label" style={{ marginTop: 12 }}>
-                תקצירי תאוריה, נוסחאות KaTeX ודגשים מרכזיים (הדבק או ערוך את הטקסט שחולץ):
-                <textarea
-                  value={formData.studyMaterialsRaw}
-                  onChange={e => updateField('studyMaterialsRaw', e.target.value)}
-                  placeholder={`נוסחאות שחובה להכיר:\n- דה מורגן: ¬(p ∧ q) ≡ ¬p ∨ ¬q\n- קבוצת החזקה: |P(A)| = 2^|A|\n- משפט הממדים: dim(U+W) = dim(U) + dim(W) - dim(U∩W)`}
-                  rows={9}
-                />
-              </label>
-            </div>
-          )}
-
-          {/* STEP 4 */}
-          {currentStep === 4 && (
-            <div className="step-content">
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 10 }}>
-                <h3 style={{ margin: 0 }}>שלב 4: שאלוני מבחנים, פתרונות ומאגרי שאלות</h3>
-                <small style={{ color: 'var(--text-muted)' }}>שאלות אמריקאיות, שאלות פתוחות ורמזים</small>
-              </div>
-
-              {renderUploader(
-                'step4',
-                'העלאת שאלוני מבחן ופתרונות (DOCX, PDF, TXT, JSON)',
-                'העלה קובצי בחינה מקוריים. המערכת תזהה את השאלות ותבנה מהן בנק תרגול'
-              )}
-
-              <label className="answer-label" style={{ marginTop: 12 }}>
-                שאלות בחינה ופתרונות (המערכת תסווג ותייצר בנק שאלות ופתרונות צעד-אחר-צעד):
-                <textarea
-                  value={formData.examsRaw}
-                  onChange={e => updateField('examsRaw', e.target.value)}
-                  placeholder={`שאלה 1 (מבחן 2025): הוכיחו באינדוקציה כי 1 + 2 + ... + n = n(n+1)/2.\nפתרון: בסיס n=1: מתקיים. הנחה: נניח עבור k. צעד: נוסיף k+1 ונקבל...`}
-                  rows={9}
-                />
-              </label>
-            </div>
-          )}
-
-          {/* STEP 5 */}
-          {currentStep === 5 && (
-            <div className="step-content">
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 10 }}>
-                <h3 style={{ margin: 0 }}>שלב 5: מבנה הבחינה, טיימר והפקת האתר</h3>
-                <small style={{ color: 'var(--text-muted)' }}>הגדרות סימולציית הבחינה והפעלה</small>
-              </div>
-
-              {renderUploader(
-                'step5',
-                'ייבוא חבילת קורס מוכנה מראש (Full Course Package JSON)',
-                'אם יש ברשותך קובץ JSON שלם של קורס אחר, העלה אותו כאן לייבוא מיידי',
-                '.json'
-              )}
-
-              <div className="form-row" style={{ marginTop: 14 }}>
-                <label>
-                  משך בחינה רשמי (שעון עצר)
-                  <select value={formData.examDuration} onChange={e => updateField('examDuration', e.target.value)}>
-                    <option value="2 שעות">2 שעות (120 דקות)</option>
-                    <option value="2.5 שעות">2.5 שעות (150 דקות)</option>
-                    <option value="3 שעות">3 שעות (180 דקות)</option>
-                    <option value="3.5 שעות">3.5 שעות (210 דקות)</option>
-                  </select>
-                </label>
-
-                <label className="grow">
-                  מבנה שאלון הבחינה
-                  <input
-                    value={formData.examStructure}
-                    onChange={e => updateField('examStructure', e.target.value)}
-                    placeholder="לדוגמה: 2 שאלות פתוחות (60%) + 6 שאלות ברירה (40%)"
-                  />
-                </label>
-              </div>
-
-              <div className="card" style={{ background: 'var(--bg-elevated)', border: '1px solid var(--primary)', borderRadius: 'var(--radius-lg)', marginTop: 20, padding: 18 }}>
-                <div className="ttl" style={{ color: 'var(--primary)', display: 'flex', alignItems: 'center', gap: 8, fontSize: '1.05rem' }}>
-                  <Sparkles size={18} /> מה ייווצר עבור הקורס?
-                </div>
-                <ul style={{ margin: '10px 0 0', paddingRight: 20, fontSize: '0.92rem', color: 'var(--text-secondary)', lineHeight: 1.6 }}>
-                  <li>✓ אתר למידה אינטראקטיבי מלא הכולל 22 מסכים ייעודיים.</li>
-                  <li>✓ פרקי לימוד מפורטים עם תוכן, הגדרות ונוסחאות KaTeX חדות.</li>
-                  <li>✓ מאגר שאלות עם פתרונות מלאים, רמזים מדורגים ומעקב עצמי.</li>
-                  <li>✓ סימולציות בחינה מלאות בזמן אמת עם טיימר וחישוב ציון.</li>
-                  <li>✓ כרטיסיות זיכרון פעיל (3D Flashcards) וקטלוג מלכודות בחינה.</li>
-                  <li>✓ מעבדה אינטראקטיבית ולוח מעקב התקדמות אישי השמור בדפדפן.</li>
-                </ul>
-              </div>
-            </div>
-          )}
-        </div>
-
-        {/* Wizard Footer Controls */}
-        <div className="wizard-footer" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: 18, paddingTop: 14, borderTop: '1px solid var(--border)' }}>
-          <div>
-            {currentStep > 1 && (
-              <button
-                className="ghost-button"
-                onClick={() => setCurrentStep(currentStep - 1)}
-                style={{ display: 'inline-flex', alignItems: 'center', gap: 6 }}
-              >
-                <ChevronRight size={18} />
-                הקודם
-              </button>
-            )}
           </div>
 
-          <div style={{ display: 'flex', gap: 10 }}>
-            <button className="ghost-button" onClick={onClose}>
+          {notice && (
+            <div
+              style={{
+                marginBottom: 14,
+                padding: '9px 12px',
+                borderRadius: 8,
+                background: notice.type === 'error' ? 'var(--danger-subtle)' : 'var(--success-subtle)',
+                color: notice.type === 'error' ? 'var(--danger)' : 'var(--success)',
+                fontSize: '0.84rem',
+                fontWeight: 600,
+                display: 'flex',
+                alignItems: 'center',
+                gap: 8
+              }}
+            >
+              {notice.type === 'error' ? <AlertCircle size={15} /> : <Check size={15} />}
+              <span>{notice.msg}</span>
+            </div>
+          )}
+
+          {/* Step 1: Course Repository Identity */}
+          <div className="form-row" style={{ marginBottom: 16 }}>
+            <label className="grow">
+              שם הקורס *
+              <input
+                value={title}
+                onChange={e => setTitle(e.target.value)}
+                placeholder="לדוגמה: אלגוריתמים, חדו״א 1, מערכות הפעלה..."
+                autoFocus
+              />
+            </label>
+            <label style={{ width: 120 }}>
+              קוד קורס
+              <input
+                value={code}
+                onChange={e => setCode(e.target.value)}
+                placeholder="623309"
+              />
+            </label>
+            <label style={{ width: 150 }}>
+              תחום
+              <select value={category} onChange={e => setCategory(e.target.value)}>
+                <option value="cs">מדעי המחשב</option>
+                <option value="math">מתמטיקה</option>
+                <option value="web">פיתוח תוכנה</option>
+                <option value="general">קורס כללי</option>
+              </select>
+            </label>
+            <label className="grow">
+              מוסד / מרצה
+              <input
+                value={institution}
+                onChange={e => setInstitution(e.target.value)}
+                placeholder="מוסד אקדמי"
+              />
+            </label>
+          </div>
+
+          {/* Step 2: Universal Drag & Drop Repository Dropzone + 4 Folder Buckets */}
+          <input
+            ref={universalInputRef}
+            type="file"
+            multiple
+            accept=".docx,.pdf,.txt,.md,.tex,.json,.csv"
+            style={{ display: 'none' }}
+            onChange={e => {
+              ingestFiles(e.target.files, null);
+              e.target.value = '';
+            }}
+          />
+          <input
+            ref={bucketInputRef}
+            type="file"
+            multiple
+            accept=".docx,.pdf,.txt,.md,.tex,.json,.csv"
+            style={{ display: 'none' }}
+            onChange={e => {
+              ingestFiles(e.target.files, activeBucketUpload);
+              e.target.value = '';
+            }}
+          />
+
+          <div
+            onDragOver={e => {
+              e.preventDefault();
+              setIsDragging(true);
+            }}
+            onDragLeave={() => setIsDragging(false)}
+            onDrop={e => {
+              e.preventDefault();
+              setIsDragging(false);
+              ingestFiles(e.dataTransfer.files, null);
+            }}
+            style={{
+              border: isDragging ? '2px dashed var(--primary)' : '1.5px dashed var(--border-strong)',
+              borderRadius: 12,
+              padding: '18px 20px',
+              background: isDragging ? 'var(--primary-subtle)' : 'var(--bg-page)',
+              marginBottom: 16,
+              transition: 'all 0.15s ease'
+            }}
+          >
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 12, marginBottom: 14 }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+                <div
+                  style={{
+                    width: 40,
+                    height: 40,
+                    borderRadius: 10,
+                    background: 'var(--primary-subtle)',
+                    color: 'var(--primary)',
+                    display: 'grid',
+                    placeItems: 'center'
+                  }}
+                >
+                  <UploadCloud size={20} />
+                </div>
+                <div>
+                  <b style={{ fontSize: '0.94rem', display: 'block' }}>
+                    גרור לכאן את כל קובצי הקורס או בחר לפי תיקייה
+                  </b>
+                  <small style={{ color: 'var(--text-muted)', fontSize: '0.8rem' }}>
+                    תומך ב-Word (`.docx`), `.pdf`, `.txt`, `.md`, `.tex`, `.json` — המערכת תסווג ותחלץ את התוכן אוטומטית
+                  </small>
+                </div>
+              </div>
+
+              <button
+                type="button"
+                className="primary"
+                onClick={() => universalInputRef.current?.click()}
+                style={{ fontSize: '0.84rem', padding: '8px 14px' }}
+              >
+                <UploadCloud size={15} />
+                <span>העלה קבצים למאגר</span>
+              </button>
+            </div>
+
+            {/* 4 Repository Folder Buckets */}
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(175px, 1fr))', gap: 10 }}>
+              {[
+                { key: 'syllabus', title: 'סילבוס ותוכנית', desc: 'חילוץ פרקי הקורס', icon: <BookOpen size={15} color="var(--primary)" /> },
+                { key: 'summary', title: 'סיכומים והרצאות', desc: 'בניית יחידות הלימוד', icon: <FileText size={15} color="var(--success)" /> },
+                { key: 'exam', title: 'מבחני עבר ופתרונות', desc: 'בנק שאלות וסימולציות', icon: <FileCheck2 size={15} color="var(--accent)" /> },
+                { key: 'formula', title: 'דפי נוסחאות', desc: 'נוסחאות ודף יום לפני', icon: <Calculator size={15} color="var(--warning)" /> }
+              ].map(bucket => (
+                <div
+                  key={bucket.key}
+                  style={{
+                    background: 'var(--bg-surface)',
+                    border: '1px solid var(--border-subtle)',
+                    borderRadius: 10,
+                    padding: '10px 12px',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    justifyContent: 'space-between',
+                    gap: 8
+                  }}
+                >
+                  <div>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 3 }}>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+                        {bucket.icon}
+                        <b style={{ fontSize: '0.82rem' }}>{bucket.title}</b>
+                      </div>
+                      <span className="pill" style={{ fontSize: '0.7rem', padding: '1px 7px' }}>
+                        {counts[bucket.key]}
+                      </span>
+                    </div>
+                    <small style={{ color: 'var(--text-muted)', fontSize: '0.74rem', display: 'block' }}>
+                      {bucket.desc}
+                    </small>
+                  </div>
+
+                  <button
+                    type="button"
+                    className="ghost-button"
+                    onClick={() => {
+                      setActiveBucketUpload(bucket.key);
+                      setTimeout(() => bucketInputRef.current?.click(), 10);
+                    }}
+                    style={{ width: '100%', padding: '5px 8px', fontSize: '0.76rem' }}
+                  >
+                    <Plus size={13} />
+                    <span>הוסף קובצי {REPO_CATEGORIES[bucket.key].badge}</span>
+                  </button>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Optional Direct Text Snippet Adder */}
+          {showTextAdder && (
+            <div
+              style={{
+                border: '1px solid var(--border-strong)',
+                borderRadius: 10,
+                padding: 14,
+                background: 'var(--bg-surface)',
+                marginBottom: 16
+              }}
+            >
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 10 }}>
+                <b style={{ fontSize: '0.88rem' }}>הוספת טקסט ישירות כקובץ במאגר</b>
+                <button type="button" className="text-link" onClick={() => setShowTextAdder(false)} style={{ fontSize: '0.78rem' }}>
+                  סגור
+                </button>
+              </div>
+              <div className="form-row" style={{ marginBottom: 10 }}>
+                <label className="grow">
+                  שם המסמך
+                  <input
+                    value={snippetTitle}
+                    onChange={e => setSnippetTitle(e.target.value)}
+                    placeholder="לדוגמה: מבחן 2025 מועד א׳ / סיכום הרצאה 3"
+                  />
+                </label>
+                <label style={{ width: 190 }}>
+                  שיוך לתיקייה במאגר
+                  <select value={snippetCategory} onChange={e => setSnippetCategory(e.target.value)}>
+                    <option value="exam">מבחני עבר ופתרונות</option>
+                    <option value="summary">סיכומים והרצאות</option>
+                    <option value="syllabus">סילבוס ותוכנית קורס</option>
+                    <option value="formula">דפי נוסחאות</option>
+                  </select>
+                </label>
+              </div>
+              <textarea
+                value={snippetContent}
+                onChange={e => setSnippetContent(e.target.value)}
+                rows={4}
+                placeholder="הדבק כאן את תוכן המבחן, הסיכום או הסילבוס..."
+                style={{
+                  width: '100%',
+                  padding: 10,
+                  borderRadius: 8,
+                  border: '1px solid var(--border-subtle)',
+                  background: 'var(--bg-page)',
+                  fontSize: '0.84rem',
+                  marginBottom: 8
+                }}
+              />
+              <button type="button" className="primary" onClick={handleAddTextSnippet} style={{ padding: '6px 14px', fontSize: '0.82rem' }}>
+                שמור במאגר הקורס
+              </button>
+            </div>
+          )}
+
+          {/* Two-Column Repository Inspector: Uploaded Files Tree + Extracted Syllabus Chapters */}
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: 16 }}>
+            {/* Column 1: Repository File Explorer */}
+            <div
+              style={{
+                border: '1px solid var(--border-subtle)',
+                borderRadius: 12,
+                padding: 14,
+                background: 'var(--bg-surface)',
+                display: 'flex',
+                flexDirection: 'column'
+              }}
+            >
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 10 }}>
+                <b style={{ fontSize: '0.88rem' }}>קבצים במאגר הקורס ({repoFiles.length})</b>
+                <div style={{ display: 'flex', gap: 4 }}>
+                  {[
+                    ['all', 'הכל'],
+                    ['syllabus', 'סילבוס'],
+                    ['summary', 'סיכומים'],
+                    ['exam', 'מבחנים']
+                  ].map(([key, label]) => (
+                    <button
+                      key={key}
+                      type="button"
+                      onClick={() => setActiveBucketFilter(key)}
+                      style={{
+                        padding: '2px 8px',
+                        borderRadius: 6,
+                        fontSize: '0.72rem',
+                        fontWeight: 600,
+                        background: activeBucketFilter === key ? 'var(--primary-subtle)' : 'transparent',
+                        color: activeBucketFilter === key ? 'var(--primary)' : 'var(--text-muted)'
+                      }}
+                    >
+                      {label}
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              {visibleFiles.length === 0 ? (
+                <div
+                  style={{
+                    padding: '28px 16px',
+                    textAlign: 'center',
+                    color: 'var(--text-muted)',
+                    fontSize: '0.82rem',
+                    background: 'var(--bg-page)',
+                    borderRadius: 8,
+                    border: '1px dashed var(--border-subtle)'
+                  }}
+                >
+                  טרם הועלו קבצים לתיקייה זו. העלה קובצי סילבוס, סיכומים או מבחני עבר למעלה.
+                </div>
+              ) : (
+                <div style={{ display: 'flex', flexDirection: 'column', gap: 6, maxHeight: 220, overflowY: 'auto' }}>
+                  {visibleFiles.map(file => (
+                    <div
+                      key={file.id}
+                      style={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'space-between',
+                        gap: 8,
+                        padding: '7px 10px',
+                        borderRadius: 8,
+                        background: 'var(--bg-page)',
+                        border: '1px solid var(--border-subtle)',
+                        fontSize: '0.82rem'
+                      }}
+                    >
+                      <div style={{ minWidth: 0, flex: 1 }}>
+                        <div style={{ fontWeight: 600, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                          {file.name}
+                        </div>
+                        <small style={{ color: 'var(--text-muted)', fontSize: '0.72rem' }}>
+                          {file.sizeFormatted} · {file.content ? `${file.content.length.toLocaleString()} תווים חולצו` : 'קובץ מקור'}
+                        </small>
+                      </div>
+
+                      <select
+                        value={file.category}
+                        onChange={e => handleChangeFileCategory(file.id, e.target.value)}
+                        style={{
+                          padding: '3px 6px',
+                          borderRadius: 6,
+                          border: '1px solid var(--border-subtle)',
+                          background: 'var(--bg-surface)',
+                          fontSize: '0.74rem',
+                          fontWeight: 600,
+                          color: 'var(--primary)'
+                        }}
+                      >
+                        <option value="syllabus">סילבוס</option>
+                        <option value="summary">סיכום / הרצאה</option>
+                        <option value="exam">מבחן עבר</option>
+                        <option value="formula">דף נוסחאות</option>
+                      </select>
+
+                      {file.content && (
+                        <button
+                          type="button"
+                          onClick={() => setPreviewFile(previewFile?.id === file.id ? null : file)}
+                          title="תצוגה מקדימה של הטקסט שחולץ"
+                          style={{ color: 'var(--text-secondary)', padding: 4, display: 'flex' }}
+                        >
+                          <Eye size={14} />
+                        </button>
+                      )}
+
+                      <button
+                        type="button"
+                        onClick={() => handleRemoveRepoFile(file.id)}
+                        title="הסר מהמאגר"
+                        style={{ color: 'var(--danger)', padding: 4, display: 'flex' }}
+                      >
+                        <Trash2 size={14} />
+                      </button>
+                    </div>
+                  ))}
+                </div>
+              )}
+
+              {previewFile && (
+                <div
+                  style={{
+                    marginTop: 10,
+                    padding: 10,
+                    borderRadius: 8,
+                    background: 'var(--bg-page)',
+                    border: '1px solid var(--border-strong)',
+                    fontSize: '0.78rem',
+                    maxHeight: 110,
+                    overflowY: 'auto',
+                    whiteSpace: 'pre-wrap',
+                    color: 'var(--text-secondary)'
+                  }}
+                >
+                  <b style={{ display: 'block', marginBottom: 4, color: 'var(--text-primary)' }}>
+                    תוכן שחולץ מתוך {previewFile.name}:
+                  </b>
+                  {previewFile.content.slice(0, 600)}
+                  {previewFile.content.length > 600 ? '...' : ''}
+                </div>
+              )}
+            </div>
+
+            {/* Column 2: Extracted Syllabus Chapters Preview & Editor */}
+            <div
+              style={{
+                border: '1px solid var(--border-subtle)',
+                borderRadius: 12,
+                padding: 14,
+                background: 'var(--bg-surface)',
+                display: 'flex',
+                flexDirection: 'column'
+              }}
+            >
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 10 }}>
+                <b style={{ fontSize: '0.88rem' }}>מבנה פרקי הקורס ({topics.length})</b>
+                <small style={{ color: 'var(--text-muted)', fontSize: '0.74rem' }}>
+                  מחולץ אוטומטית מהסילבוס והסיכומים
+                </small>
+              </div>
+
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 6, maxHeight: 175, overflowY: 'auto', marginBottom: 10 }}>
+                {topics.length === 0 ? (
+                  <div
+                    style={{
+                      padding: '22px 12px',
+                      textAlign: 'center',
+                      color: 'var(--text-muted)',
+                      fontSize: '0.8rem',
+                      background: 'var(--bg-page)',
+                      borderRadius: 8,
+                      border: '1px dashed var(--border-subtle)'
+                    }}
+                  >
+                    העלה קובץ סילבוס/סיכומים לחילוץ אוטומטי של הפרקים, או הוסף פרקים ידנית למטה.
+                  </div>
+                ) : (
+                  topics.map((t, idx) => (
+                    <div
+                      key={idx}
+                      style={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: 8,
+                        background: 'var(--bg-page)',
+                        border: '1px solid var(--border-subtle)',
+                        borderRadius: 7,
+                        padding: '4px 10px'
+                      }}
+                    >
+                      <span style={{ fontSize: '0.74rem', fontWeight: 700, color: 'var(--text-muted)', fontFamily: 'var(--font-mono)' }}>
+                        {idx + 1}.
+                      </span>
+                      <input
+                        value={t}
+                        onChange={e => setTopics(prev => prev.map((item, i) => (i === idx ? e.target.value : item)))}
+                        style={{
+                          flex: 1,
+                          border: 'none',
+                          background: 'transparent',
+                          fontSize: '0.84rem',
+                          color: 'var(--text-primary)',
+                          outline: 'none'
+                        }}
+                      />
+                      <button
+                        type="button"
+                        onClick={() => setTopics(prev => prev.filter((_, i) => i !== idx))}
+                        style={{ color: 'var(--text-muted)', padding: 3, display: 'flex' }}
+                      >
+                        <Trash2 size={13} />
+                      </button>
+                    </div>
+                  ))
+                )}
+              </div>
+
+              <div style={{ display: 'flex', gap: 6, marginTop: 'auto' }}>
+                <input
+                  value={newTopicText}
+                  onChange={e => setNewTopicText(e.target.value)}
+                  onKeyDown={e => {
+                    if (e.key === 'Enter') {
+                      e.preventDefault();
+                      handleAddTopic();
+                    }
+                  }}
+                  placeholder="הוסף פרק נוסף..."
+                  style={{
+                    flex: 1,
+                    padding: '6px 10px',
+                    borderRadius: 7,
+                    border: '1px solid var(--border-subtle)',
+                    background: 'var(--bg-page)',
+                    fontSize: '0.82rem'
+                  }}
+                />
+                <button
+                  type="button"
+                  className="ghost-button"
+                  onClick={handleAddTopic}
+                  style={{ padding: '6px 10px', fontSize: '0.8rem' }}
+                >
+                  <Plus size={14} />
+                  <span>הוסף</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Footer with Repository Synthesis Summary */}
+        <div
+          style={{
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            flexWrap: 'wrap',
+            gap: 12,
+            padding: '14px 24px',
+            borderTop: '1px solid var(--border-subtle)',
+            background: 'var(--bg-page)'
+          }}
+        >
+          <div style={{ display: 'flex', alignItems: 'center', gap: 10, fontSize: '0.8rem', color: 'var(--text-secondary)' }}>
+            <span>
+              <b>סיכום המאגר:</b> {counts.syllabus} סילבוס · {counts.summary} סיכומים · {counts.exam} מבחני עבר · {counts.formula} דפי נוסחאות
+            </span>
+          </div>
+
+          <div style={{ display: 'flex', gap: 8 }}>
+            <button type="button" className="ghost-button" onClick={onClose}>
               ביטול
             </button>
-
-            {currentStep < 5 ? (
-              <button
-                className="primary"
-                onClick={() => setCurrentStep(currentStep + 1)}
-                style={{ display: 'inline-flex', alignItems: 'center', gap: 6 }}
-              >
-                המשך לשלב הבא
-                <ChevronLeft size={18} />
-              </button>
-            ) : (
-              <button
-                className="primary"
-                onClick={handleCompileAndPublish}
-                disabled={isCompiling}
-                style={{ background: 'var(--green)', borderColor: 'var(--green)', display: 'inline-flex', alignItems: 'center', gap: 8 }}
-              >
-                <Sparkles size={18} />
-                {isCompiling ? 'מחולל אתר למידה...' : 'חולל והפעל אתר למידה עכשיו!'}
-              </button>
-            )}
+            <button type="button" className="primary" onClick={handleBuildCourseFromRepo}>
+              <Sparkles size={15} />
+              <span>בנה קורס מכל קובצי המאגר</span>
+            </button>
           </div>
         </div>
       </div>

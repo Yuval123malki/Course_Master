@@ -1,91 +1,88 @@
 import React from 'react';
 import {
   Home,
-  Map,
-  Calendar,
   BookOpen,
-  FlaskConical,
-  Clock,
   HelpCircle,
-  FileCheck2,
-  FileText,
-  Shapes,
-  Timer,
-  AlertTriangle,
   Layers,
-  Bookmark,
-  CheckSquare,
-  BarChart2,
-  FolderArchive,
+  Wand2,
   Settings,
   X,
   PanelLeftClose,
   PanelLeftOpen,
-  Sparkles,
-  Lock,
-  ArrowLeftRight,
-  GraduationCap,
-  Wand2
+  FolderKanban
 } from 'lucide-react';
 import { useCourse } from '../../context/CourseStore';
 import { navigate } from '../../utils/dom';
 
 export const NAV_GROUPS = [
   {
-    name: 'למידה',
+    name: 'מרחב למידה',
     items: [
-      { label: 'דף הבית', icon: <Home size={18} />, path: 'home' },
-      { label: 'מחולל Study Pack', icon: <Wand2 size={18} />, path: 'studypack' },
-      { label: 'פרקי לימוד', icon: <BookOpen size={18} />, path: 'chapters' },
-      { label: 'מעבדה והמחשות', icon: <FlaskConical size={18} />, path: 'lab' },
-      { label: 'סיבוכיות ונוסחאות', icon: <Clock size={18} />, path: 'complexity' }
+      {
+        label: 'דף הבית ויומן',
+        icon: <Home size={17} />,
+        path: 'home',
+        match: ['home', 'calendar', 'progress', 'plan']
+      },
+      {
+        label: 'פרקים ומעבדה',
+        icon: <BookOpen size={17} />,
+        path: 'chapters',
+        match: ['chapters', 'lab', 'complexity', 'map', 'tools']
+      },
+      {
+        label: 'תרגול ומבחנים',
+        icon: <HelpCircle size={17} />,
+        path: 'practice',
+        match: ['practice', 'simulations', 'exams', 'patterns']
+      },
+      {
+        label: 'כרטיסיות וחזרה',
+        icon: <Layers size={17} />,
+        path: 'cards',
+        match: ['cards', 'review', 'errors', 'bookmarks']
+      },
+      {
+        label: 'סיכומים ו-AI',
+        icon: <Wand2 size={17} />,
+        path: 'studypack',
+        match: ['studypack']
+      }
     ]
   },
   {
-    name: 'תרגול ומבחנים',
+    name: 'מערכת',
     items: [
-      { label: 'בנק שאלות', icon: <HelpCircle size={18} />, path: 'practice' },
-      { label: 'סימולציות מבחן', icon: <Timer size={18} />, path: 'simulations' },
-      { label: 'יומן מבחנים ויעדים', icon: <Calendar size={18} />, path: 'calendar' },
-      { label: 'ניתוח בחינות', icon: <FileText size={18} />, path: 'exams' }
-    ]
-  },
-  {
-    name: 'כרטיסיות וחזרה',
-    items: [
-      { label: 'כרטיסיות חכמות', icon: <Layers size={18} />, path: 'cards' },
-      { label: 'מאגר טעויות', icon: <AlertTriangle size={18} />, path: 'errors' },
-      { label: 'יום לפני הבחינה', icon: <CheckSquare size={18} />, path: 'review' },
-      { label: 'שמור לחזרה', icon: <Bookmark size={18} />, path: 'bookmarks' }
-    ]
-  },
-  {
-    name: 'אישי וניהול',
-    items: [
-      { label: 'ההתקדמות שלי', icon: <BarChart2 size={18} />, path: 'progress' },
-      { label: 'סטודיו המאסטר', icon: <Sparkles size={18} />, path: 'courses' },
-      { label: 'מדריך ועזרה', icon: <HelpCircle size={18} />, path: 'help' },
-      { label: 'הגדרות וגיבוי', icon: <Settings size={18} />, path: 'settings' }
+      {
+        label: 'ספריית הקורסים',
+        icon: <FolderKanban size={17} />,
+        path: 'courses',
+        match: ['courses', 'studio']
+      },
+      {
+        label: 'הגדרות וגיבוי',
+        icon: <Settings size={17} />,
+        path: 'settings',
+        match: ['settings', 'help', 'sources']
+      }
     ]
   }
 ];
 
 export function Sidebar({ currentRoute, isMobileOpen, setMobileOpen, isCollapsed, setCollapsed, store }) {
-  const { activeCourse } = useCourse();
+  const { courses, activeCourse, activeCourseId, selectCourse } = useCourse();
   const courseInfo = activeCourse?.courseData?.COURSE || {};
 
-  const isSelectingCourse = currentRoute === 'courses' || currentRoute === 'studio' || currentRoute.startsWith('studio/edit/');
-
-  const isCurrent = (path) => {
-    if (currentRoute === path) return true;
-    if (path === 'chapters' && currentRoute.startsWith('chapter/')) return true;
-    if (path === 'practice' && currentRoute.startsWith('question/')) return true;
-    if (path === 'simulations' && currentRoute.startsWith('sim/')) return true;
-    if (path === 'courses' && currentRoute.startsWith('studio')) return true;
+  const isCurrent = (item) => {
+    if (currentRoute === item.path) return true;
+    if (item.match?.includes(currentRoute)) return true;
+    if (item.path === 'chapters' && currentRoute.startsWith('chapter/')) return true;
+    if (item.path === 'practice' && (currentRoute.startsWith('question/') || currentRoute.startsWith('sim/'))) return true;
+    if (item.path === 'courses' && currentRoute.startsWith('studio')) return true;
     return false;
   };
 
-  const syncText = store.sync || 'נשמר במכשיר הזה';
+  const syncText = store.sync || 'נשמר אוטומטית במכשיר';
 
   return (
     <aside
@@ -95,55 +92,39 @@ export function Sidebar({ currentRoute, isMobileOpen, setMobileOpen, isCollapsed
     >
       <div
         className="brand"
-        onClick={() => navigate('courses')}
+        onClick={() => navigate('home')}
         style={{ cursor: 'pointer' }}
-        title={isSelectingCourse ? 'סטודיו המאסטר' : 'חזרה לדשבורד בחירת קורס'}
+        title="Course_Master · חזרה לדף הבית"
       >
-        <div className="brand-mark">
-          <span />
-          <span />
-          <span />
+        <div className="brand-mark" aria-hidden="true">
+          <svg width="21" height="21" viewBox="0 0 192 192" fill="none">
+            <path
+              d="M36 122V58L72 92L96 46L120 92L156 58V122"
+              stroke="#ffffff"
+              strokeWidth="18"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+            <rect x="48" y="144" width="96" height="16" rx="8" fill="rgba(255,255,255,0.8)" />
+          </svg>
         </div>
         <div style={{ flex: 1, minWidth: 0, overflow: 'hidden' }}>
-          {isSelectingCourse ? (
-            <>
-              <strong>CourseForge Studio</strong>
-              <small>מרכז ניהול ובחירת קורסים</small>
-            </>
-          ) : (
-            <>
-              <strong style={{ whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
-                {courseInfo.name || 'מערכת הלמידה'}
-              </strong>
-              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 6, marginTop: 2 }}>
-                <small style={{ color: 'var(--primary)', fontWeight: 600 }}>
-                  {courseInfo.code ? `קוד ${courseInfo.code}` : 'פעיל'}
-                </small>
-                <button
-                  className="ghost-button"
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    navigate('courses');
-                  }}
-                  title="בחר קורס אחר"
-                  style={{
-                    padding: '2px 6px',
-                    fontSize: '0.72rem',
-                    borderRadius: 6,
-                    display: 'inline-flex',
-                    alignItems: 'center',
-                    gap: 3,
-                    border: '1px solid var(--border)',
-                    background: 'var(--bg-elevated)',
-                    color: 'var(--text-secondary)'
-                  }}
-                >
-                  <ArrowLeftRight size={11} />
-                  <span>החלף</span>
-                </button>
-              </div>
-            </>
-          )}
+          <div style={{ display: 'flex', alignItems: 'center', gap: 6 }} dir="ltr">
+            <strong
+              style={{
+                fontSize: '0.95rem',
+                fontWeight: 800,
+                fontFamily: 'var(--font-mono)',
+                letterSpacing: '-0.03em',
+                color: 'var(--text-primary)'
+              }}
+            >
+              Course<span style={{ color: 'var(--primary)' }}>_</span>Master
+            </strong>
+          </div>
+          <small style={{ fontSize: '0.73rem', color: 'var(--text-muted)', display: 'block', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+            {courseInfo.name || 'מערכת הלמידה ומאגרי הקורסים'}
+          </small>
         </div>
         <button
           className="close-drawer"
@@ -153,81 +134,48 @@ export function Sidebar({ currentRoute, isMobileOpen, setMobileOpen, isCollapsed
             setMobileOpen(false);
           }}
         >
-          <X size={20} />
+          <X size={18} />
         </button>
       </div>
 
-      <nav aria-label="תפריט הקורס">
-        {isSelectingCourse ? (
-          /* Selection Mode: Course Content is Locked until a Course is Picked */
-          <div style={{ padding: '8px 0' }}>
-            <div className="nav-group">
-              <p>קטלוג מרכזי</p>
-              <button
-                className={currentRoute === 'courses' ? 'active' : ''}
-                onClick={() => {
-                  navigate('courses');
-                  setMobileOpen(false);
-                }}
-              >
-                <Sparkles size={18} />
-                <span>דשבורד כל הקורסים</span>
-              </button>
-              <button
-                className={currentRoute === 'settings' ? 'active' : ''}
-                onClick={() => {
-                  navigate('settings');
-                  setMobileOpen(false);
-                }}
-              >
-                <Settings size={18} />
-                <span>הגדרות וגיבוי</span>
-              </button>
-            </div>
+      {/* Clean Course Switcher right inside Sidebar */}
+      <div className="sidebar-course-picker">
+        <select
+          className="sidebar-course-select"
+          value={activeCourseId}
+          aria-label="בחר קורס פעיל"
+          onChange={e => {
+            if (e.target.value === '__new__') {
+              navigate('courses?new=1');
+              setMobileOpen(false);
+              return;
+            }
+            selectCourse(e.target.value);
+            if (currentRoute === 'courses' || currentRoute.startsWith('studio')) {
+              navigate('home');
+            }
+          }}
+        >
+          {courses.map(c => (
+            <option key={c.id} value={c.id}>
+              {c.courseData?.COURSE?.name || c.id}
+            </option>
+          ))}
+          <option value="__new__">+ הוסף קורס חדש...</option>
+        </select>
+      </div>
 
-            <div
-              style={{
-                margin: '22px 14px',
-                padding: '18px 14px',
-                borderRadius: 'var(--radius-lg)',
-                background: 'var(--bg-elevated)',
-                border: '1px dashed var(--border)',
-                textAlign: 'center'
-              }}
-            >
-              <div
-                style={{
-                  width: 38,
-                  height: 38,
-                  borderRadius: '50%',
-                  background: 'var(--primary-soft)',
-                  color: 'var(--primary)',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  margin: '0 auto 10px'
-                }}
-              >
-                <Lock size={18} />
-              </div>
-              <b style={{ display: 'block', fontSize: '0.92rem', marginBottom: 4, color: 'var(--text-primary)' }}>
-                תכני הלמידה נעולים
-              </b>
-              <p style={{ margin: 0, fontSize: '0.8rem', color: 'var(--text-muted)', lineHeight: 1.45 }}>
-                בחר קורס מהלוח כדי לפתוח את כל 22 מסכי הלמידה: פרקים, מעבדה, בנק שאלות, סימולציות וכרטיסיות.
-              </p>
-            </div>
-          </div>
-        ) : (
-          /* Course Active Mode: All 20+ course learning tools are open and accessible */
-          NAV_GROUPS.map(group => (
-            <div key={group.name} className="nav-group">
-              <p>{group.name}</p>
-              {group.items.map(item => (
+      <nav aria-label="תפריט הקורס">
+        {NAV_GROUPS.map(group => (
+          <div key={group.name} className="nav-group">
+            <p>{group.name}</p>
+            {group.items.map(item => {
+              const active = isCurrent(item);
+              return (
                 <button
                   key={item.path}
-                  className={isCurrent(item.path) ? 'active' : ''}
-                  aria-current={isCurrent(item.path) ? 'page' : undefined}
+                  className={active ? 'active' : ''}
+                  aria-current={active ? 'page' : undefined}
                   onClick={() => {
                     navigate(item.path);
                     setMobileOpen(false);
@@ -237,14 +185,14 @@ export function Sidebar({ currentRoute, isMobileOpen, setMobileOpen, isCollapsed
                   {item.icon}
                   <span>{item.label}</span>
                 </button>
-              ))}
-            </div>
-          ))
-        )}
+              );
+            })}
+          </div>
+        ))}
       </nav>
 
       <div className="sidebar-bottom">
-        <div className="status-line sidebar-sync" title={syncText}>
+        <div className=" status-line sidebar-sync" title={syncText}>
           <span className="sync-dot connected" />
           <span>{syncText}</span>
         </div>
@@ -253,11 +201,10 @@ export function Sidebar({ currentRoute, isMobileOpen, setMobileOpen, isCollapsed
           aria-label={isCollapsed ? 'הרחב תפריט' : 'צמצם תפריט'}
           title={isCollapsed ? 'הרחב תפריט' : 'צמצם תפריט'}
         >
-          {isCollapsed ? <PanelLeftOpen size={18} /> : <PanelLeftClose size={18} />}
+          {isCollapsed ? <PanelLeftOpen size={16} /> : <PanelLeftClose size={16} />}
           <span>{isCollapsed ? 'הרחב תפריט' : 'צמצם תפריט'}</span>
         </button>
       </div>
     </aside>
   );
 }
-

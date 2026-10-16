@@ -175,7 +175,7 @@ export function StudyPackPage({ store }) {
     }, 3200);
   };
 
-  // 1-Click Convert Study Pack directly into an active CourseForge course
+  // 1-Click Convert Study Pack directly into an active Course_Master course
   const handleConvertToCourse = () => {
     if (!activePack) return;
     const topicsFromLectures = (activePack.lectures || []).map((l, i) => `${i + 1}. ${l.title}`).join('\n');
@@ -199,7 +199,7 @@ export function StudyPackPage({ store }) {
     const mb = activePack.masterBook;
     let md = `# ${mb.title}\n\n`;
     md += `**מרצה:** ${mb.lecturer} | **מוסד:** ${mb.institution} | **שנת לימוד:** ${mb.academicYear}\n\n`;
-    md += `*הופק אוטומטית ע"י CourseForge Automated Study Pack Generator*\n\n---\n\n`;
+    md += `*הופק אוטומטית ע"י Course_Master Automated Study Pack Generator*\n\n---\n\n`;
 
     md += `## תוכן עניינים\n`;
     (mb.toc || []).forEach(t => {
@@ -399,7 +399,7 @@ export function StudyPackPage({ store }) {
             }}
           >
             <Share2 size={14} />
-            <span>המר לקורס פעיל ב-CourseForge</span>
+            <span>המר לקורס פעיל ב-Course_Master</span>
           </button>
         </div>
       </div>

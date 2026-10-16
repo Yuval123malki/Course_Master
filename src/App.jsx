@@ -8,6 +8,7 @@ import { currentRoute, navigate } from './utils/dom';
 // Layout
 import { Sidebar } from './components/layout/Sidebar';
 import { Topbar } from './components/layout/Topbar';
+import { HubTabs } from './components/layout/HubTabs';
 import { MobileNav, Footer } from './components/layout/MobileNav';
 import { SearchDialog } from './components/search/SearchDialog';
 import { UserModal } from './components/account/UserModal';
@@ -187,6 +188,7 @@ function AppContent() {
         />
 
         <main id="main-content" tabIndex={-1} className="main-content" key={`${activeCourse?.id}-${route}`}>
+          <HubTabs currentRoute={route} />
           {renderContent()}
         </main>
 
